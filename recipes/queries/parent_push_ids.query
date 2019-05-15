@@ -1,0 +1,8 @@
+from: repo
+select:
+    - {value: push.id, sort: descending}
+where:
+    and:
+        - eq: {branch.name: "autoland"}
+        - lt: {push.id: {$eval: pushid}}
+limit: {$eval: limit}

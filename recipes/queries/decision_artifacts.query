@@ -1,0 +1,11 @@
+from: task
+select:
+    - {name: id, value: task.id}
+    - {name: artifacts, value: task.artifacts.url}
+where:
+    and:
+        - prefix: {repo.changeset.id: {$eval: rev}}
+        - eq: {repo.branch.name: "autoland"}
+        - eq: {task.kind: "decision-task"}
+format: list
+limit: 100

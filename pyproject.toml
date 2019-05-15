@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "ci-recipes"
+version = "0.1.0"
+description = "Collection of CI related ActiveData recipes."
+
+packages = [
+    { include = "recipes" },
+]
+include = [
+    "extra/*",
+    "*recipes/queries/*",
+]
+
+license = "MPL-2.0"
+authors = [
+    "Andrew Halberstadt <ahal@mozilla.com>",
+]
+
+readme = "README.md"
+repository = "https://github.com/ahal/ci-recipes"
+homepage = "https://github.com/ahal/ci-recipes"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+adr = "^0.15.0"
+
+[tool.poetry.dev-dependencies]
+flake8 = "^3.7.7"
+flake8-import-order = "^0.18.1"
+pytest = "^3.0.0"
+tox = "^3.7.0"
