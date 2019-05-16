@@ -9,6 +9,7 @@ autoland for now.
 
 from argparse import Namespace
 from collections import defaultdict, namedtuple
+from dataclasses import dataclass
 from enum import Enum
 
 import requests
@@ -23,7 +24,12 @@ class Status(Enum):
     INTERMITTENT = 2
 
 
-Task = namedtuple('Task', ['label', 'duration', 'result', 'classification'])
+@dataclass
+class Task:
+    label: str
+    duration: int
+    result: Status
+    classification: str
 
 
 @memoize

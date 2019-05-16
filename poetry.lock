@@ -399,8 +399,8 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "0.15.4"
 
 [metadata]
-content-hash = "b311aaad43a2674db8124742a3dd4a14f49ba24d4d434b9c968412875aaf0140"
-python-versions = "^3.6"
+content-hash = "20c3e015e6c7426f5945b73fc5b1d36b9349317738a987df85e5ded1a2c8f7db"
+python-versions = "^3.7"
 
 [metadata.hashes]
 adr = ["47f44a5b3c3b30e29acdbca3c1abe84211e6c155446f624bceebe99b653a26cd", "f446f2b9ccf697c93ccbea46d50a861ae5322d30c6f516b8965cdda6ac0ccae8"]
