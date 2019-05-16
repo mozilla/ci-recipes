@@ -1,0 +1,17 @@
+format:
+  flags: ['--format']
+  type: str
+  default: 'table'
+  choices: ['table', 'json']
+  help: "format of result"
+
+limit:
+  flags: ['--limit']
+  type: int
+  default: 10
+  help: "limit the number of rows in result"
+
+rev:
+  flags: ['-r', '--rev']
+  default: '5b33b070378a'
+  help: "Revision to limit results to"
