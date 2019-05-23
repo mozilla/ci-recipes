@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "Collection of CI related ActiveData recipes."
 
 packages = [
+    { include = "ci_info" },
     { include = "recipes" },
 ]
 include = [
