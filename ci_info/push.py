@@ -25,6 +25,10 @@ class Task:
     result: str
     classification: str
 
+    @property
+    def failed(self):
+        return self.result in ('busted', 'exception', 'testfailed')
+
 
 @dataclass
 class LabelSummary:
@@ -37,7 +41,7 @@ class LabelSummary:
 
     @property
     def classifications(self):
-        return set(t.classification for t in self.tasks)
+        return set(t.classification for t in self.tasks if t.failed)
 
     @property
     def results(self):
@@ -47,7 +51,7 @@ class LabelSummary:
     def status(self):
         overall_status = None
         for task in self.tasks:
-            if task.result in ('busted', 'exception', 'testfailed'):
+            if task.failed:
                 status = Status.FAIL
             else:
                 status = Status.PASS
@@ -99,18 +103,20 @@ class Push:
         """
         return self._hgmo['pushid']
 
-    @property
+    @memoized_property
     def parent(self):
         """Returns the parent push of this push.
 
         Returns:
             Push: A `Push` instance representing the parent push.
         """
+        other = self
         while True:
             for rev in other._hgmo['parents']:
                 parent = Push(rev)
                 if parent.pushid != self.pushid:
                     return parent
+                other = parent
 
     @memoized_property
     def tasks(self):
@@ -121,7 +127,19 @@ class Push:
         """
         args = Namespace(rev=self.rev)
         data = run_query('push_results', args)['data']
-        return [Task(**kwargs) for kwargs in data]
+
+        tasks = []
+        for kwargs in data:
+            # Do a bit of data sanitization.
+            if any(a not in kwargs for a in ('label', 'duration', 'result', 'classification')):
+                continue
+
+            if kwargs['duration'] <= 0:
+                continue
+
+            tasks.append(Task(**kwargs))
+
+        return tasks
 
     @property
     def task_labels(self):
@@ -200,39 +218,90 @@ class Push:
         return int(duration / 3600)
 
     @memoized_property
-    def regressions(self):
-        """The set of all task labels that were regressed by this push.
+    def candidate_regressions(self):
+        """The set of task labels that are regression candidates for this push.
+
+        A candidate regression is any task label for which at least one
+        associated task failed (therefore including intermittents), and which
+        is either not classified or fixed by commit.
 
         Returns:
             set: Set of task labels (str).
         """
-        regressions = set()
+        failclass = ('not classified', 'fixed by commit')
+        candidate_regressions = set()
         for label, summary in self.label_summaries.items():
             if summary.status == Status.PASS:
                 continue
 
-            if any(c in ('not classified', 'fixed by commit') for c in summary.classifications):
-                regressions.add(label)
+            if all(c not in failclass for c in summary.classifications):
+                continue
+
+            candidate_regressions.add(label)
+        return candidate_regressions
+
+    @memoized_property
+    def regressions(self):
+        """All regressions, both likely and definite.
+
+        Each regression is associated with an integer, which is the number of
+        parent pushes that didn't run the label. A count of 0 means the label
+        passed on the previous push. A count of 3 means there were three pushes
+        between this one and the last time the task passed (so any one of them
+        could have caused it). A count of 99 means that the maximum number of
+        parents were searched without finding the task and we gave up.
+
+        Returns:
+            dict: A dict of the form {<label>: <int>}.
+        """
+        # The maximum number of parents to search. If the task wasn't run
+        # on any of them, we assume there was no prior regression.
+        max_depth = 5
+        regressions = {}
+
+        for label in self.candidate_regressions:
+            count = 0
+            other = self.parent
+            prior_regression = False
+
+            while True:
+                if label in other.task_labels:
+                    if other.label_summaries[label].status != Status.PASS:
+                        prior_regression = True
+                    break
+
+                other = other.parent
+                count += 1
+
+            if not prior_regression:
+                regressions[label] = count
+
         return regressions
 
     @property
-    def regressions_missed(self):
-        """The set of all task labels that were regressed by this push and were
-        not caught by a task that was initially scheduled. E.g the regression was
-        a retrigger/backfill.
+    def possible_regressions(self):
+        """The set of all task labels that may have been regressed by this push.
 
-        Returns: set: Set of task labels (str).
+        A possible regression is a candidate_regression that didn't run on one or
+        more parent pushes.
+
+        Returns:
+            set: Set of task labels (str).
         """
-        return self.regressions - self.scheduled_task_labels
+        return set([label for label, count in self.regressions.items() if count > 0])
 
     @property
-    def regressions_caught(self):
-        """The set of all task labels that were regressed by this push and were
-        caught by a task that was initially scheduled.
+    def likely_regressions(self):
+        """The set of all task labels that were likely regressed by this push.
 
-        Returns: set: Set of task labels (str).
+        A likely regression is a candidate_regression that both ran and passed
+        on the immediate parent push. It still isn't a sure thing as the task
+        could be intermittent.
+
+        Returns:
+            set: Set of task labels (str).
         """
-        return self.regressions & self.scheduled_task_labels
+        return set([label for label, count in self.regressions.items() if count == 0])
 
     @memoized_property
     def _decision_artifact_urls(self):
