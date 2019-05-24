@@ -5,12 +5,11 @@ from imp import reload
 from io import StringIO
 from pathlib import Path
 
+import adr
 import pytest
 import yaml
 from requests import Response
 from requests.exceptions import HTTPError
-
-import adr
 
 here = Path(__file__).parent.resolve()
 

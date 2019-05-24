@@ -1,8 +1,8 @@
 Available Recipes
 ==================
 
-inspect
--------
+push_health
+-----------
 
-.. automodule:: adr.recipes.inspect
+.. automodule:: recipes.push_health
     :no-undoc-members:
