@@ -17,7 +17,7 @@ First [install poetry][2], then run:
     $ cd ci-recipes
     $ poetry install
 
-You will need Python 3.6 or higher.
+You will need Python 3.7 or higher.
 
 # Usage
 
