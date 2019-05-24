@@ -163,7 +163,7 @@ class Push:
     def scheduled_task_labels(self):
         """The set of task labels that were originally scheduled to run on this push.
 
-        This excludes retriggers and backfills.
+        This excludes backfills and Add New Jobs.
 
         Returns:
             set: A set of task labels (str).
@@ -186,7 +186,8 @@ class Push:
         """All label summaries combining retriggers.
 
         Returns:
-            dict: A dictionary of the form {<label>: [<LabelSummary>]}."""
+            dict: A dictionary of the form {<label>: [<LabelSummary>]}.
+        """
         labels = defaultdict(list)
         for task in self.tasks:
             labels[task.label].append(task)
@@ -212,9 +213,15 @@ class Push:
         seen = set()
         duration = 0
         for task in self.tasks:
-            if task.label not in seen:
-                seen.add(task.label)
-                duration += task.duration
+            if task.label not in self.scheduled_task_labels:
+                continue
+
+            if task.label in seen:
+                continue
+
+            seen.add(task.label)
+            duration += task.duration
+
         return int(duration / 3600)
 
     @memoized_property
