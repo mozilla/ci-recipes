@@ -1,0 +1,1730 @@
+recipe: push_health
+args:
+- -r
+- 3e5fe2fc2f17
+queries:
+- data:
+  - artifacts:
+    - https://queue.taskcluster.net/v1/task/b1XyxlBTSCKiC9njkCrH3Q/artifacts/public/actions.json
+    - https://queue.taskcluster.net/v1/task/b1XyxlBTSCKiC9njkCrH3Q/artifacts/public/chain-of-trust.json
+    - https://queue.taskcluster.net/v1/task/b1XyxlBTSCKiC9njkCrH3Q/artifacts/public/chain-of-trust.json.sig
+    - https://queue.taskcluster.net/v1/task/b1XyxlBTSCKiC9njkCrH3Q/artifacts/public/chainOfTrust.json.asc
+    - https://queue.taskcluster.net/v1/task/b1XyxlBTSCKiC9njkCrH3Q/artifacts/public/full-task-graph.json
+    - https://queue.taskcluster.net/v1/task/b1XyxlBTSCKiC9njkCrH3Q/artifacts/public/label-to-taskid.json
+    - https://queue.taskcluster.net/v1/task/b1XyxlBTSCKiC9njkCrH3Q/artifacts/public/logs/certified.log
+    - https://queue.taskcluster.net/v1/task/b1XyxlBTSCKiC9njkCrH3Q/artifacts/public/logs/live.log
+    - https://queue.taskcluster.net/v1/task/b1XyxlBTSCKiC9njkCrH3Q/artifacts/public/logs/live_backing.log
+    - https://queue.taskcluster.net/v1/task/b1XyxlBTSCKiC9njkCrH3Q/artifacts/public/parameters.yml
+    - https://queue.taskcluster.net/v1/task/b1XyxlBTSCKiC9njkCrH3Q/artifacts/public/runnable-jobs.json
+    - https://queue.taskcluster.net/v1/task/b1XyxlBTSCKiC9njkCrH3Q/artifacts/public/target-tasks.json
+    - https://queue.taskcluster.net/v1/task/b1XyxlBTSCKiC9njkCrH3Q/artifacts/public/task-graph.json
+    id: b1XyxlBTSCKiC9njkCrH3Q
+- data:
+  - classification: not classified
+    duration: 2057
+    label: valgrind-linux64-valgrind/opt
+    result: success
+  - classification: not classified
+    duration: 2186
+    label: test-macosx64/debug-mochitest-devtools-chrome-e10s-3
+    result: success
+  - classification: not classified
+    duration: 2441
+    label: build-linux64-base-toolchains-clang/opt
+    result: success
+  - classification: not classified
+    duration: 2013
+    label: test-windows10-64-qr/debug-reftest-e10s-3
+    result: success
+  - classification: not classified
+    duration: 5433
+    label: test-windows7-32/debug-web-platform-tests-e10s-11
+    result: success
+  - classification: not classified
+    duration: 5000
+    label: test-linux64-asan/opt-web-platform-tests-e10s-3
+    result: success
+  - classification: fixed by commit
+    duration: 242
+    label: test-linux32-shippable/opt-xpcshell-e10s-2
+    result: testfailed
+  - classification: not classified
+    duration: 5143
+    label: hazard-linux64-haz/debug
+    result: success
+  - classification: not classified
+    duration: 1973
+    label: test-android-em-4.3-arm7-api-16/debug-geckoview-junit-e10s-7
+    result: success
+  - classification: not classified
+    duration: 2667
+    label: test-macosx64/debug-mochitest-browser-chrome-e10s-9
+    result: success
+  - classification: not classified
+    duration: 2509
+    label: test-linux64-asan/opt-mochitest-browser-chrome-e10s-7
+    result: success
+  - classification: not classified
+    duration: 38
+    label: source-test-mozlint-yaml
+    result: success
+  - classification: not classified
+    duration: 1358
+    label: build-linux64-base-toolchains/opt
+    result: success
+  - classification: not classified
+    duration: 1343
+    label: build-linux64-plain/debug
+    result: success
+  - classification: not classified
+    duration: 5499
+    label: test-macosx64/debug-web-platform-tests-e10s-2
+    result: success
+  - classification: not classified
+    duration: 447
+    label: build-linux-rusttests/opt
+    result: success
+  - classification: not classified
+    duration: 1333
+    label: test-linux64-shippable/opt-mochitest-browser-chrome-e10s-7
+    result: success
+  - classification: not classified
+    duration: 264
+    label: upload-generated-sources-win64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1757
+    label: test-macosx64-shippable/opt-reftest-e10s-2
+    result: success
+  - classification: not classified
+    duration: 2527
+    label: build-win64-plain/debug
+    result: success
+  - classification: not classified
+    duration: 2037
+    label: test-linux64/debug-mochitest-media-spi-e10s-2
+    result: success
+  - classification: not classified
+    duration: 199
+    label: test-macosx64/debug-marionette-media-e10s
+    result: success
+  - classification: not classified
+    duration: 1606
+    label: build-android-api-16/debug
+    result: success
+  - classification: not classified
+    duration: 1497
+    label: build-macosx64-fuzzing/debug
+    result: success
+  - classification: not classified
+    duration: 2666
+    label: test-android-em-4.3-arm7-api-16/debug-crashtest-1proc-8
+    result: success
+  - classification: not classified
+    duration: 1262
+    label: test-windows10-64/debug-mochitest-webgl1-ext-e10s
+    result: success
+  - classification: not classified
+    duration: 383
+    label: build-linux64-rusttests/opt
+    result: success
+  - classification: not classified
+    duration: 6523
+    label: build-linux-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 19
+    label: source-test-jsshell-bench-sunspider-sm
+    result: success
+  - classification: not classified
+    duration: 717
+    label: repackage-msi-win32-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1881
+    label: test-android-em-4.3-arm7-api-16/pgo-reftest-1proc-26
+    result: success
+  - classification: not classified
+    duration: 1472
+    label: test-linux64-asan/opt-mochitest-devtools-chrome-e10s-4
+    result: success
+  - classification: not classified
+    duration: 1050
+    label: test-linux64-asan/opt-mochitest-browser-chrome-e10s-8
+    result: success
+  - classification: not classified
+    duration: 414
+    label: test-windows7-32/debug-firefox-ui-functional-remote-e10s
+    result: success
+  - classification: not classified
+    duration: 1346
+    label: build-win32-rusttests/debug
+    result: success
+  - classification: not classified
+    duration: 1273
+    label: build-linux64/debug
+    result: success
+  - classification: not classified
+    duration: 810
+    label: build-macosx64-asan-fuzzing/opt
+    result: success
+  - classification: not classified
+    duration: 1105
+    label: build-linux64/opt
+    result: success
+  - classification: not classified
+    duration: 156
+    label: test-macosx64-shippable/opt-mochitest-devtools-webreplay-e10s
+    result: success
+  - classification: not classified
+    duration: 1298
+    label: test-macosx64-shippable/opt-mochitest-browser-chrome-e10s-5
+    result: success
+  - classification: not classified
+    duration: 1097
+    label: test-windows10-64-shippable-qr/opt-web-platform-tests-reftests-e10s-1
+    result: success
+  - classification: not classified
+    duration: 2059
+    label: test-windows10-64-qr/debug-reftest-e10s-4
+    result: success
+  - classification: not classified
+    duration: 751
+    label: repackage-win64-aarch64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 238
+    label: upload-generated-sources-linux-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1118
+    label: build-macosx64/debug
+    result: success
+  - classification: not classified
+    duration: 1868
+    label: test-windows7-32/debug-mochitest-browser-chrome-e10s-6
+    result: success
+  - classification: not classified
+    duration: 2942
+    label: build-win64-fuzzing/debug
+    result: success
+  - classification: not classified
+    duration: 2838
+    label: build-win64-noopt/debug
+    result: success
+  - classification: not classified
+    duration: 1933
+    label: test-windows10-64-asan/opt-mochitest-browser-chrome-e10s-7
+    result: success
+  - classification: not classified
+    duration: 2160
+    label: build-android-x86/opt
+    result: success
+  - classification: not classified
+    duration: 2034
+    label: build-linux64-asan-fuzzing/opt
+    result: success
+  - classification: not classified
+    duration: 1097
+    label: test-macosx64-shippable/opt-mochitest-browser-chrome-e10s-1
+    result: success
+  - classification: not classified
+    duration: 4076
+    label: test-macosx64/debug-mochitest-devtools-chrome-e10s-5
+    result: success
+  - classification: not classified
+    duration: 1098
+    label: test-linux64/debug-mochitest-browser-chrome-e10s-14
+    result: success
+  - classification: not classified
+    duration: 28
+    label: repackage-signing-win64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 67
+    label: repackage-signing-win32-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1440
+    label: test-windows10-64-asan/opt-mochitest-devtools-chrome-e10s-4
+    result: success
+  - classification: not classified
+    duration: 3175
+    label: build-win32/debug
+    result: success
+  - classification: not classified
+    duration: 2086
+    label: test-android-em-4.3-arm7-api-16/debug-geckoview-junit-e10s-4
+    result: success
+  - classification: not classified
+    duration: 1843
+    label: build-linux64-aarch64/opt
+    result: success
+  - classification: not classified
+    duration: 250
+    label: upload-generated-sources-macosx64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 910
+    label: build-win64-aarch64-eme/opt
+    result: success
+  - classification: not classified
+    duration: 111
+    label: repackage-linux64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 2349
+    label: test-macosx64-shippable/opt-mochitest-browser-chrome-e10s-2
+    result: success
+  - classification: not classified
+    duration: 1562
+    label: build-win32-mingwclang/debug
+    result: success
+  - classification: not classified
+    duration: 239
+    label: build-signing-win32/debug
+    result: success
+  - classification: not classified
+    duration: 1024
+    label: build-win64-aarch64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 224
+    label: build-signing-win64-aarch64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1159
+    label: test-linux64/debug-mochitest-devtools-chrome-e10s-3
+    result: success
+  - classification: not classified
+    duration: 2299
+    label: build-linux64-base-toolchains-clang/debug
+    result: success
+  - classification: not classified
+    duration: 3903
+    label: build-win64-aarch64-shippable-no-eme/opt
+    result: success
+  - classification: not classified
+    duration: 2429
+    label: build-linux64-fuzzing/debug
+    result: success
+  - classification: not classified
+    duration: 1642
+    label: test-macosx64/debug-mochitest-browser-chrome-e10s-10
+    result: success
+  - classification: not classified
+    duration: 3811
+    label: build-win64-asan-fuzzing/opt
+    result: success
+  - classification: not classified
+    duration: 17
+    label: repackage-signing-msi-win64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 87
+    label: build-signing-linux-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1957
+    label: build-win32-mingwclang/opt
+    result: success
+  - classification: not classified
+    duration: 1953
+    label: build-android-x86_64/opt
+    result: success
+  - classification: not classified
+    duration: 2145
+    label: build-android-aarch64/opt
+    result: success
+  - classification: not classified
+    duration: 1460
+    label: test-android-em-4.3-arm7-api-16/pgo-xpcshell-1proc-1
+    result: success
+  - classification: not classified
+    duration: 1991
+    label: test-linux64-asan/opt-mochitest-e10s-8
+    result: success
+  - classification: not classified
+    duration: 192
+    label: build-signing-linux64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1194
+    label: build-linux64-asan/debug
+    result: success
+  - classification: not classified
+    duration: 5664
+    label: build-win32-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 2871
+    label: build-android-aarch64/pgo
+    result: success
+  - classification: not classified
+    duration: 264
+    label: upload-generated-sources-win32-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 2332
+    label: test-windows10-64-shippable-qr/opt-reftest-e10s-2
+    result: success
+  - classification: not classified
+    duration: 1103
+    label: test-linux64-asan/opt-mochitest-browser-chrome-e10s-9
+    result: success
+  - classification: not classified
+    duration: 384
+    label: repackage-macosx64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1354
+    label: build-win64-mingwclang/debug
+    result: success
+  - classification: not classified
+    duration: 500
+    label: build-linux-rusttests/debug
+    result: success
+  - classification: not classified
+    duration: 201
+    label: repackage-linux-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 15
+    label: repackage-signing-msi-win32-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 917
+    label: test-macosx64/debug-web-platform-tests-reftests-e10s-3
+    result: success
+  - classification: not classified
+    duration: 1157
+    label: test-windows7-32/debug-mochitest-webgl1-core-e10s
+    result: success
+  - classification: intermittent
+    duration: 1366
+    label: test-macosx64-shippable/opt-mochitest-browser-chrome-e10s-7
+    result: testfailed
+  - classification: not classified
+    duration: 31
+    label: source-test-jsshell-bench-sixspeed-sm
+    result: success
+  - classification: not classified
+    duration: 1322
+    label: build-android-x86-fuzzing/debug
+    result: success
+  - classification: not classified
+    duration: 1577
+    label: build-win32-rusttests/opt
+    result: success
+  - classification: not classified
+    duration: 1594
+    label: build-linux64-base-toolchains/debug
+    result: success
+  - classification: not classified
+    duration: 1916
+    label: test-linux64-qr/debug-xpcshell-e10s-5
+    result: success
+  - classification: not classified
+    duration: 1504
+    label: test-linux64-asan/opt-mochitest-browser-chrome-e10s-1
+    result: success
+  - classification: not classified
+    duration: 3115
+    label: build-win64-aarch64/debug
+    result: success
+  - classification: not classified
+    duration: 1168
+    label: test-linux32/debug-mochitest-1proc-15
+    result: success
+  - classification: not classified
+    duration: 3712
+    label: build-win32/opt
+    result: success
+  - classification: not classified
+    duration: 7170
+    label: build-win64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1400
+    label: test-linux32-shippable/opt-mochitest-browser-chrome-e10s-7
+    result: success
+  - classification: not classified
+    duration: 32
+    label: repackage-signing-win64-aarch64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1541
+    label: build-linux/debug
+    result: success
+  - classification: fixed by commit
+    duration: 929
+    label: test-android-em-7.0-x86_64/opt-xpcshell-1proc-1
+    result: testfailed
+  - classification: not classified
+    duration: 341
+    label: test-linux64-asan/opt-telemetry-tests-client-e10s
+    result: success
+  - classification: not classified
+    duration: 1663
+    label: test-linux64-asan/opt-mochitest-browser-chrome-e10s-3
+    result: success
+  - classification: not classified
+    duration: 219
+    label: build-signing-win64/debug
+    result: success
+  - classification: not classified
+    duration: 3127
+    label: test-linux64-asan/opt-web-platform-tests-wdspec-e10s-1
+    result: success
+  - classification: fixed by commit
+    duration: 1434
+    label: test-windows10-64/debug-mochitest-browser-chrome-e10s-4
+    result: testfailed
+  - classification: not classified
+    duration: 951
+    label: instrumented-build-android-api-16/pgo
+    result: success
+  - classification: not classified
+    duration: 1194
+    label: test-windows7-32/debug-crashtest-e10s
+    result: success
+  - classification: not classified
+    duration: 3463
+    label: build-linux64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1791
+    label: test-android-em-4.3-arm7-api-16/pgo-geckoview-junit-e10s-1
+    result: success
+  - classification: not classified
+    duration: 1690
+    label: test-linux32/debug-reftest-1proc-6
+    result: success
+  - classification: not classified
+    duration: 2351
+    label: test-macosx64/debug-mochitest-e10s-3
+    result: success
+  - classification: not classified
+    duration: 1213
+    label: test-macosx64/debug-mochitest-chrome-1proc-1
+    result: success
+  - classification: not classified
+    duration: 1605
+    label: test-macosx64/debug-mochitest-browser-chrome-e10s-4
+    result: success
+  - classification: not classified
+    duration: 1651
+    label: test-linux64-asan/opt-mochitest-devtools-chrome-e10s-6
+    result: success
+  - classification: not classified
+    duration: 2912
+    label: test-linux32/debug-web-platform-tests-1proc-1
+    result: success
+  - classification: not classified
+    duration: 2835
+    label: test-windows10-64/debug-web-platform-tests-e10s-16
+    result: success
+  - classification: not classified
+    duration: 336
+    label: generate-profile-linux64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1493
+    label: test-macosx64/debug-mochitest-browser-chrome-e10s-3
+    result: success
+  - classification: not classified
+    duration: 1673
+    label: test-linux64/debug-web-platform-tests-reftests-e10s-4
+    result: success
+  - classification: not classified
+    duration: 3912
+    label: build-macosx64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1154
+    label: instrumented-build-linux64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1361
+    label: build-win64-rusttests/debug
+    result: success
+  - classification: not classified
+    duration: 1798
+    label: build-android-api-16/opt
+    result: success
+  - classification: not classified
+    duration: 1479
+    label: build-win64-rusttests/opt
+    result: success
+  - classification: not classified
+    duration: 1859
+    label: test-macosx64/debug-mochitest-devtools-chrome-e10s-4
+    result: success
+  - classification: not classified
+    duration: 1382
+    label: test-linux64-asan/opt-mochitest-browser-chrome-e10s-4
+    result: success
+  - classification: not classified
+    duration: 511
+    label: test-android-em-7.0-x86_64/opt-marionette-1proc
+    result: success
+  - classification: not classified
+    duration: 354
+    label: source-test-python-tryselect-linux64/opt-py2
+    result: success
+  - classification: not classified
+    duration: 2365
+    label: test-macosx64-shippable-qr/opt-reftest-e10s-2
+    result: success
+  - classification: not classified
+    duration: 5451
+    label: test-macosx64/debug-web-platform-tests-e10s-16
+    result: success
+  - classification: not classified
+    duration: 479
+    label: repackage-msi-win64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 158
+    label: build-signing-win32-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 2084
+    label: test-android-em-4.3-arm7-api-16/pgo-reftest-1proc-12
+    result: success
+  - classification: not classified
+    duration: 1615
+    label: test-android-em-4.3-arm7-api-16/pgo-geckoview-junit-e10s-3
+    result: success
+  - classification: not classified
+    duration: 2607
+    label: test-android-em-4.3-arm7-api-16/pgo-mochitest-1proc-19
+    result: success
+  - classification: not classified
+    duration: 760
+    label: repackage-win32-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 131
+    label: build-signing-macosx64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1286
+    label: test-windows10-64/debug-web-platform-tests-reftests-e10s-1
+    result: success
+  - classification: not classified
+    duration: 181
+    label: build-signing-win64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 168
+    label: source-test-jsshell-bench-ares6-sm
+    result: success
+  - classification: not classified
+    duration: 545
+    label: test-android-em-7.0-x86_64/opt-crashtest-e10s
+    result: success
+  - classification: intermittent
+    duration: 921
+    label: test-android-em-7.0-x86_64/opt-mochitest-e10s-2
+    result: testfailed
+  - classification: not classified
+    duration: 1008
+    label: test-android-em-7.0-x86_64/opt-xpcshell-1proc-3
+    result: success
+  - classification: not classified
+    duration: 1904
+    label: test-linux64-qr/debug-mochitest-e10s-15
+    result: success
+  - classification: not classified
+    duration: 3486
+    label: build-win64/debug
+    result: success
+  - classification: not classified
+    duration: 1555
+    label: test-linux64-asan/opt-mochitest-devtools-chrome-e10s-3
+    result: success
+  - classification: not classified
+    duration: 3066
+    label: build-win32-noopt/debug
+    result: success
+  - classification: not classified
+    duration: 1035
+    label: build-macosx64-noopt/debug
+    result: success
+  - classification: not classified
+    duration: 4145
+    label: build-win64-asan/opt
+    result: success
+  - classification: not classified
+    duration: 1552
+    label: test-windows7-32/debug-mochitest-chrome-1proc-3
+    result: success
+  - classification: not classified
+    duration: 1337
+    label: test-macosx64-shippable/opt-web-platform-tests-wdspec-e10s-1
+    result: success
+  - classification: not classified
+    duration: 2279
+    label: test-macosx64/debug-mochitest-e10s-5
+    result: success
+  - classification: not classified
+    duration: 1530
+    label: test-linux64-qr/debug-xpcshell-e10s-4
+    result: success
+  - classification: not classified
+    duration: 129
+    label: source-test-jsshell-bench-web-tooling-sm
+    result: success
+  - classification: not classified
+    duration: 649
+    label: test-windows10-aarch64/opt-mochitest-a11y-1proc
+    result: success
+  - classification: not classified
+    duration: 52
+    label: source-test-jsshell-bench-octane-sm
+    result: success
+  - classification: not classified
+    duration: 1989
+    label: test-linux32-shippable/opt-web-platform-tests-e10s-11
+    result: success
+  - classification: not classified
+    duration: 375
+    label: build-linux64-rusttests/debug
+    result: success
+  - classification: not classified
+    duration: 285
+    label: upload-generated-sources-win64-aarch64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1257
+    label: test-macosx64-shippable/opt-mochitest-browser-chrome-e10s-4
+    result: success
+  - classification: not classified
+    duration: 1161
+    label: test-macosx64-shippable/opt-mochitest-e10s-5
+    result: success
+  - classification: not classified
+    duration: 2419
+    label: test-linux32/debug-web-platform-tests-1proc-6
+    result: success
+  - classification: not classified
+    duration: 704
+    label: source-test-python-tryselect-windows10-64/opt-py2
+    result: success
+  - classification: not classified
+    duration: 1280
+    label: build-linux64-noopt/debug
+    result: success
+  - classification: not classified
+    duration: 730
+    label: repackage-win64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1895
+    label: build-android-x86_64/debug
+    result: success
+  - classification: not classified
+    duration: 354
+    label: artifact-build-linux64-artifact/opt
+    result: success
+  - classification: not classified
+    duration: 1667
+    label: build-win64-mingwclang/opt
+    result: success
+  - classification: not classified
+    duration: 338
+    label: diff-artifact-win64-aarch64-eme-validation
+    result: success
+  - classification: not classified
+    duration: 5523
+    label: build-win64-asan/debug
+    result: success
+  - classification: not classified
+    duration: 292
+    label: upload-generated-sources-linux64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 5426
+    label: test-macosx64/debug-web-platform-tests-e10s-7
+    result: success
+  - classification: not classified
+    duration: 1698
+    label: test-android-em-4.3-arm7-api-16/debug-geckoview-junit-e10s-6
+    result: success
+  - classification: not classified
+    duration: 2182
+    label: generate-profile-android-api-16/pgo
+    result: success
+  - classification: not classified
+    duration: 2304
+    label: test-windows10-64/debug-mochitest-devtools-chrome-e10s-4
+    result: success
+  - classification: not classified
+    duration: 2628
+    label: build-android-api-16/pgo
+    result: success
+  - classification: not classified
+    duration: 2429
+    label: test-windows7-32/debug-mochitest-devtools-chrome-e10s-5
+    result: success
+  - classification: not classified
+    duration: 741
+    label: static-analysis-autotest-linux64-st-autotest/debug
+    result: success
+  - classification: not classified
+    duration: 747
+    label: test-macosx64-shippable/opt-mochitest-e10s-2
+    result: success
+  - classification: not classified
+    duration: 2254
+    label: test-windows7-32/debug-mochitest-browser-chrome-e10s-1
+    result: success
+  - classification: not classified
+    duration: 200
+    label: build-signing-win64-aarch64/opt
+    result: success
+  - classification: not classified
+    duration: 4833
+    label: build-win64-aarch64/opt
+    result: success
+  - classification: not classified
+    duration: 1237
+    label: build-android-aarch64/debug
+    result: success
+  - classification: not classified
+    duration: 1769
+    label: source-test-file-metadata-bugzilla-components
+    result: success
+  - classification: not classified
+    duration: 2004
+    label: build-linux64-asan/opt
+    result: success
+- data:
+  - classification: not classified
+    duration: 1842
+    label: test-linux64-qr/debug-mochitest-e10s-15
+    result: success
+  - classification: not classified
+    duration: 96
+    label: build-signing-linux64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1336
+    label: test-windows10-64/debug-mochitest-webgl1-ext-e10s
+    result: success
+  - classification: not classified
+    duration: 1761
+    label: build-win64-mingwclang/opt
+    result: success
+  - classification: not classified
+    duration: 2431
+    label: build-android-api-16/pgo
+    result: success
+  - classification: not classified
+    duration: 220
+    label: repackage-linux64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1500
+    label: build-linux64-noopt/debug
+    result: success
+  - classification: not classified
+    duration: 618
+    label: artifact-build-linux64-artifact/opt
+    result: success
+  - classification: not classified
+    duration: 3015
+    label: build-win64/debug
+    result: success
+  - classification: not classified
+    duration: 2177
+    label: test-linux32-shippable/opt-web-platform-tests-e10s-11
+    result: success
+  - classification: not classified
+    duration: 3372
+    label: build-win32/opt
+    result: success
+  - classification: not classified
+    duration: 552
+    label: test-windows7-32/debug-firefox-ui-functional-remote-e10s
+    result: success
+  - classification: not classified
+    duration: 14
+    label: repackage-signing-msi-win32-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 271
+    label: upload-generated-sources-win32-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 6868
+    label: build-win32-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 51
+    label: source-test-jsshell-bench-octane-sm
+    result: success
+  - classification: not classified
+    duration: 161
+    label: repackage-macosx64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 2165
+    label: test-macosx64/debug-mochitest-devtools-chrome-e10s-3
+    result: success
+  - classification: not classified
+    duration: 315
+    label: l10n-linux64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1015
+    label: test-linux64/debug-mochitest-browser-chrome-e10s-14
+    result: success
+  - classification: not classified
+    duration: 473
+    label: l10n-android-api-16/opt
+    result: success
+  - classification: not classified
+    duration: 1674
+    label: test-android-em-4.3-arm7-api-16/debug-geckoview-junit-e10s-4
+    result: success
+  - classification: not classified
+    duration: 2684
+    label: build-win64-plain/debug
+    result: success
+  - classification: not classified
+    duration: 1455
+    label: test-linux64-qr/debug-xpcshell-e10s-4
+    result: success
+  - classification: not classified
+    duration: 722
+    label: static-analysis-autotest-linux64-st-autotest/debug
+    result: success
+  - classification: not classified
+    duration: 914
+    label: build-linux64-asan-fuzzing/opt
+    result: success
+  - classification: not classified
+    duration: 1124
+    label: instrumented-build-android-api-16/pgo
+    result: success
+  - classification: not classified
+    duration: 427
+    label: generate-profile-linux64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1390
+    label: build-linux64/debug
+    result: success
+  - classification: not classified
+    duration: 1253
+    label: test-linux64-shippable/opt-mochitest-browser-chrome-e10s-7
+    result: success
+  - classification: not classified
+    duration: 2139
+    label: build-win32-mingwclang/opt
+    result: success
+  - classification: not classified
+    duration: 2043
+    label: build-linux64-base-toolchains/opt
+    result: success
+  - classification: not classified
+    duration: 261
+    label: source-test-mozlint-codespell
+    result: success
+  - classification: not classified
+    duration: 1436
+    label: test-android-em-4.3-arm7-api-16/pgo-xpcshell-1proc-1
+    result: success
+  - classification: fixed by commit
+    duration: 1528
+    label: test-windows10-64/debug-mochitest-browser-chrome-e10s-4
+    result: testfailed
+  - classification: not classified
+    duration: 387
+    label: test-windows10-64/debug-test-verify-gpu-e10s
+    result: success
+  - classification: not classified
+    duration: 702
+    label: repackage-msi-win64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 7148
+    label: build-win64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 161
+    label: build-signing-win32-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 126
+    label: test-linux64-shippable/opt-test-verify-gpu-e10s
+    result: success
+  - classification: not classified
+    duration: 1483
+    label: build-android-api-16/debug
+    result: success
+  - classification: not classified
+    duration: 1895
+    label: test-windows10-64-asan/opt-mochitest-browser-chrome-e10s-7
+    result: success
+  - classification: not classified
+    duration: 2053
+    label: test-windows10-64-qr/debug-reftest-e10s-4
+    result: success
+  - classification: not classified
+    duration: 6074
+    label: build-linux-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 4060
+    label: test-macosx64/debug-mochitest-devtools-chrome-e10s-5
+    result: success
+  - classification: not classified
+    duration: 1412
+    label: test-linux64-asan/opt-mochitest-browser-chrome-e10s-4
+    result: success
+  - classification: not classified
+    duration: 1577
+    label: test-linux64-asan/opt-mochitest-browser-chrome-e10s-7
+    result: success
+  - classification: not classified
+    duration: 1332
+    label: build-macosx64-noopt/debug
+    result: success
+  - classification: not classified
+    duration: 272
+    label: upload-generated-sources-win64-aarch64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1063
+    label: test-macosx64-shippable/opt-mochitest-browser-chrome-e10s-1
+    result: success
+  - classification: not classified
+    duration: 312
+    label: test-android-em-4.3-arm7-api-16/pgo-test-verify-1proc
+    result: success
+  - classification: fixed by commit
+    duration: 1727
+    label: test-windows10-64/debug-mochitest-browser-chrome-e10s-4
+    result: testfailed
+  - classification: not classified
+    duration: 2361
+    label: test-macosx64/debug-mochitest-e10s-3
+    result: success
+  - classification: not classified
+    duration: 2219
+    label: test-android-em-4.3-arm7-api-16/debug-crashtest-1proc-8
+    result: success
+  - classification: not classified
+    duration: 1288
+    label: test-windows7-32/debug-crashtest-e10s
+    result: success
+  - classification: not classified
+    duration: 3980
+    label: build-macosx64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1509
+    label: l10n-win64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 2753
+    label: build-android-x86_64/opt
+    result: success
+  - classification: not classified
+    duration: 317
+    label: l10n-linux-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 145
+    label: build-signing-linux-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1398
+    label: build-win64-rusttests/debug
+    result: success
+  - classification: not classified
+    duration: 1053
+    label: test-linux64-asan/opt-mochitest-devtools-chrome-e10s-4
+    result: success
+  - classification: not classified
+    duration: 1364
+    label: build-win32-rusttests/debug
+    result: success
+  - classification: not classified
+    duration: 1610
+    label: test-macosx64/debug-mochitest-browser-chrome-e10s-10
+    result: success
+  - classification: not classified
+    duration: 1519
+    label: test-android-em-4.3-arm7-api-16/debug-geckoview-junit-e10s-7
+    result: success
+  - classification: not classified
+    duration: 2496
+    label: test-windows7-32/debug-mochitest-devtools-chrome-e10s-5
+    result: success
+  - classification: not classified
+    duration: 1304
+    label: test-macosx64-shippable/opt-mochitest-browser-chrome-e10s-7
+    result: success
+  - classification: not classified
+    duration: 1429
+    label: test-macosx64-shippable/opt-web-platform-tests-wdspec-e10s-1
+    result: success
+  - classification: not classified
+    duration: 63
+    label: repackage-signing-msi-win64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 5413
+    label: test-macosx64/debug-web-platform-tests-e10s-2
+    result: success
+  - classification: not classified
+    duration: 809
+    label: repackage-win64-aarch64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 2585
+    label: build-linux64-base-toolchains-clang/opt
+    result: success
+  - classification: not classified
+    duration: 2047
+    label: test-windows10-64-qr/debug-reftest-e10s-3
+    result: success
+  - classification: not classified
+    duration: 1232
+    label: test-macosx64-shippable/opt-mochitest-browser-chrome-e10s-4
+    result: success
+  - classification: not classified
+    duration: 1199
+    label: test-linux64-asan/opt-mochitest-browser-chrome-e10s-1
+    result: success
+  - classification: fixed by commit
+    duration: 1161
+    label: test-linux64/debug-test-verify-e10s
+    result: testfailed
+  - classification: not classified
+    duration: 2659
+    label: build-android-aarch64/pgo
+    result: success
+  - classification: not classified
+    duration: 1463
+    label: build-android-x86-fuzzing/debug
+    result: success
+  - classification: not classified
+    duration: 1584
+    label: build-linux64-plain/debug
+    result: success
+  - classification: not classified
+    duration: 2229
+    label: test-android-em-4.3-arm7-api-16/pgo-reftest-1proc-12
+    result: success
+  - classification: not classified
+    duration: 786
+    label: repackage-win32-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 209
+    label: test-windows10-64-shippable/opt-test-verify-gpu-e10s
+    result: success
+  - classification: not classified
+    duration: 26
+    label: repackage-signing-win64-aarch64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1414
+    label: l10n-win32-shippable/opt
+    result: success
+  - classification: fixed by commit
+    duration: 1599
+    label: test-windows10-64/debug-mochitest-browser-chrome-e10s-4
+    result: testfailed
+  - classification: not classified
+    duration: 1812
+    label: build-linux/debug
+    result: success
+  - classification: not classified
+    duration: 1247
+    label: build-android-x86_64/debug
+    result: success
+  - classification: not classified
+    duration: 2635
+    label: build-win64-noopt/debug
+    result: success
+  - classification: not classified
+    duration: 3229
+    label: build-linux64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1551
+    label: test-windows7-32/debug-mochitest-chrome-1proc-3
+    result: success
+  - classification: not classified
+    duration: 3771
+    label: build-win64-asan/opt
+    result: success
+  - classification: not classified
+    duration: 622
+    label: build-linux-rusttests/opt
+    result: success
+  - classification: not classified
+    duration: 1719
+    label: build-macosx64-asan-fuzzing/opt
+    result: success
+  - classification: not classified
+    duration: 461
+    label: test-linux64-asan/opt-telemetry-tests-client-e10s
+    result: success
+  - classification: not classified
+    duration: 5683
+    label: test-macosx64/debug-web-platform-tests-e10s-16
+    result: success
+  - classification: not classified
+    duration: 776
+    label: repackage-win64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1590
+    label: test-linux32-shippable/opt-mochitest-browser-chrome-e10s-7
+    result: success
+  - classification: not classified
+    duration: 2030
+    label: test-android-em-4.3-arm7-api-16/pgo-reftest-1proc-26
+    result: success
+  - classification: not classified
+    duration: 1653
+    label: build-linux64-base-toolchains/debug
+    result: success
+  - classification: fixed by commit
+    duration: 1567
+    label: test-windows10-64/debug-mochitest-browser-chrome-e10s-4
+    result: testfailed
+  - classification: not classified
+    duration: 1016
+    label: test-linux64/debug-mochitest-devtools-chrome-e10s-3
+    result: success
+  - classification: not classified
+    duration: 177
+    label: build-signing-win32/debug
+    result: success
+  - classification: not classified
+    duration: 203
+    label: build-signing-win64/debug
+    result: success
+  - classification: not classified
+    duration: 2911
+    label: build-win32/debug
+    result: success
+  - classification: not classified
+    duration: 586
+    label: test-android-em-7.0-x86_64/opt-crashtest-e10s
+    result: success
+  - classification: not classified
+    duration: 1131
+    label: build-linux64-asan/opt
+    result: success
+  - classification: not classified
+    duration: 1043
+    label: test-linux64-asan/opt-mochitest-browser-chrome-e10s-8
+    result: success
+  - classification: not classified
+    duration: 1611
+    label: test-windows10-64-asan/opt-mochitest-devtools-chrome-e10s-4
+    result: success
+  - classification: not classified
+    duration: 3586
+    label: build-win64-asan/debug
+    result: success
+  - classification: not classified
+    duration: 2381
+    label: test-windows10-64-shippable-qr/opt-reftest-e10s-2
+    result: success
+  - classification: not classified
+    duration: 2178
+    label: test-windows10-64/debug-mochitest-devtools-chrome-e10s-4
+    result: success
+  - classification: fixed by commit
+    duration: 1004
+    label: test-macosx64/debug-test-verify-e10s
+    result: testfailed
+  - classification: not classified
+    duration: 4726
+    label: test-linux64-asan/opt-web-platform-tests-e10s-3
+    result: success
+  - classification: fixed by commit
+    duration: 296
+    label: test-linux32-shippable/opt-xpcshell-e10s-2
+    result: testfailed
+  - classification: not classified
+    duration: 1446
+    label: test-linux64-asan/opt-mochitest-devtools-chrome-e10s-6
+    result: success
+  - classification: not classified
+    duration: 1206
+    label: test-macosx64/debug-mochitest-chrome-1proc-1
+    result: success
+  - classification: not classified
+    duration: 1550
+    label: test-linux32/debug-reftest-1proc-6
+    result: success
+  - classification: not classified
+    duration: 1849
+    label: test-windows7-32/debug-mochitest-browser-chrome-e10s-6
+    result: success
+  - classification: not classified
+    duration: 164
+    label: source-test-jsshell-bench-ares6-sm
+    result: success
+  - classification: not classified
+    duration: 2014
+    label: test-linux32/debug-web-platform-tests-1proc-6
+    result: success
+  - classification: not classified
+    duration: 1483
+    label: build-win64-rusttests/opt
+    result: success
+  - classification: not classified
+    duration: 1445
+    label: build-macosx64-fuzzing/debug
+    result: success
+  - classification: not classified
+    duration: 2023
+    label: build-android-api-16/opt
+    result: success
+  - classification: not classified
+    duration: 2299
+    label: build-linux64-base-toolchains-clang/debug
+    result: success
+  - classification: not classified
+    duration: 2293
+    label: test-macosx64/debug-mochitest-e10s-5
+    result: success
+  - classification: not classified
+    duration: 2601
+    label: test-macosx64/debug-mochitest-browser-chrome-e10s-9
+    result: success
+  - classification: not classified
+    duration: 1629
+    label: source-test-file-metadata-bugzilla-components
+    result: success
+  - classification: not classified
+    duration: 2121
+    label: test-linux64-asan/opt-mochitest-e10s-8
+    result: success
+  - classification: not classified
+    duration: 123
+    label: repackage-linux-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1723
+    label: test-android-em-4.3-arm7-api-16/pgo-geckoview-junit-e10s-1
+    result: success
+  - classification: not classified
+    duration: 22
+    label: repackage-signing-win32-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 235
+    label: upload-generated-sources-win64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1663
+    label: build-android-aarch64/debug
+    result: success
+  - classification: not classified
+    duration: 161
+    label: build-signing-win64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1839
+    label: test-android-em-4.3-arm7-api-16/debug-geckoview-junit-e10s-6
+    result: success
+  - classification: not classified
+    duration: 31
+    label: source-test-jsshell-bench-sixspeed-sm
+    result: success
+  - classification: not classified
+    duration: 181
+    label: test-macosx64-shippable/opt-test-verify-gpu-e10s
+    result: success
+  - classification: not classified
+    duration: 1183
+    label: test-linux32/debug-mochitest-1proc-15
+    result: success
+  - classification: not classified
+    duration: 2667
+    label: build-win32-noopt/debug
+    result: success
+  - classification: not classified
+    duration: 2789
+    label: test-windows10-64/debug-web-platform-tests-e10s-16
+    result: success
+  - classification: not classified
+    duration: 382
+    label: test-android-em-4.3-arm7-api-16/debug-test-verify-1proc
+    result: success
+  - classification: not classified
+    duration: 1490
+    label: test-macosx64/debug-mochitest-browser-chrome-e10s-3
+    result: success
+  - classification: not classified
+    duration: 22
+    label: source-test-jsshell-bench-sunspider-sm
+    result: success
+  - classification: not classified
+    duration: 930
+    label: test-windows10-64-shippable/opt-test-verify-e10s
+    result: success
+  - classification: fixed by commit
+    duration: 1492
+    label: test-windows10-64/debug-mochitest-browser-chrome-e10s-4
+    result: testfailed
+  - classification: not classified
+    duration: 2666
+    label: test-linux64-asan/opt-web-platform-tests-wdspec-e10s-1
+    result: success
+  - classification: not classified
+    duration: 744
+    label: test-macosx64-shippable/opt-mochitest-e10s-2
+    result: success
+  - classification: not classified
+    duration: 309
+    label: upload-generated-sources-linux64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 522
+    label: build-linux-rusttests/debug
+    result: success
+  - classification: fixed by commit
+    duration: 914
+    label: test-windows10-64/debug-test-verify-e10s
+    result: testfailed
+  - classification: not classified
+    duration: 318
+    label: source-test-mozlint-test-manifest
+    result: success
+  - classification: not classified
+    duration: 295
+    label: source-test-mozlint-localization
+    result: success
+  - classification: not classified
+    duration: 670
+    label: source-test-mozlint-eslint
+    result: success
+  - classification: not classified
+    duration: 1013
+    label: test-android-em-7.0-x86_64/opt-xpcshell-1proc-3
+    result: success
+  - classification: not classified
+    duration: 909
+    label: test-windows7-32/debug-test-verify-gpu-e10s
+    result: success
+  - classification: not classified
+    duration: 2788
+    label: test-linux32/debug-web-platform-tests-1proc-1
+    result: success
+  - classification: not classified
+    duration: 2142
+    label: test-linux64/debug-mochitest-media-spi-e10s-2
+    result: success
+  - classification: not classified
+    duration: 2374
+    label: test-macosx64-shippable/opt-mochitest-browser-chrome-e10s-2
+    result: success
+  - classification: not classified
+    duration: 2161
+    label: build-android-x86/opt
+    result: success
+  - classification: not classified
+    duration: 1093
+    label: test-linux64-asan/opt-mochitest-browser-chrome-e10s-9
+    result: success
+  - classification: not classified
+    duration: 911
+    label: test-macosx64/debug-web-platform-tests-reftests-e10s-3
+    result: success
+  - classification: fixed by commit
+    duration: 1740
+    label: test-windows10-64/debug-mochitest-browser-chrome-e10s-4
+    result: testfailed
+  - classification: not classified
+    duration: 657
+    label: test-windows10-aarch64/opt-mochitest-a11y-1proc
+    result: success
+  - classification: not classified
+    duration: 188
+    label: test-macosx64/debug-test-verify-gpu-e10s
+    result: success
+  - classification: not classified
+    duration: 1454
+    label: test-windows7-32-shippable/opt-test-verify-e10s
+    result: success
+  - classification: not classified
+    duration: 2343
+    label: test-windows7-32/debug-mochitest-browser-chrome-e10s-1
+    result: success
+  - classification: not classified
+    duration: 998
+    label: build-win64-aarch64-eme/opt
+    result: success
+  - classification: not classified
+    duration: 2030
+    label: build-android-aarch64/opt
+    result: success
+  - classification: not classified
+    duration: 445
+    label: build-linux64-rusttests/opt
+    result: success
+  - classification: not classified
+    duration: 1808
+    label: test-macosx64/debug-mochitest-devtools-chrome-e10s-4
+    result: success
+  - classification: not classified
+    duration: 872
+    label: test-linux64-shippable/opt-test-verify-e10s
+    result: success
+  - classification: not classified
+    duration: 2492
+    label: generate-profile-android-api-16/pgo
+    result: success
+  - classification: not classified
+    duration: 1141
+    label: build-win64-aarch64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 236
+    label: upload-generated-sources-linux-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1212
+    label: test-windows7-32/debug-mochitest-webgl1-core-e10s
+    result: success
+  - classification: not classified
+    duration: 345
+    label: upload-generated-sources-macosx64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1683
+    label: build-linux64/opt
+    result: success
+  - classification: not classified
+    duration: 5262
+    label: test-macosx64/debug-web-platform-tests-e10s-7
+    result: success
+  - classification: not classified
+    duration: 1154
+    label: test-macosx64-shippable/opt-mochitest-e10s-5
+    result: success
+  - classification: not classified
+    duration: 3466
+    label: build-win64-asan-fuzzing/opt
+    result: success
+  - classification: not classified
+    duration: 525
+    label: test-android-em-7.0-x86_64/opt-marionette-1proc
+    result: success
+  - classification: not classified
+    duration: 859
+    label: test-macosx64-shippable/opt-test-verify-e10s
+    result: success
+  - classification: not classified
+    duration: 1396
+    label: build-macosx64/debug
+    result: success
+  - classification: not classified
+    duration: 855
+    label: instrumented-build-linux64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1848
+    label: test-linux64-qr/debug-xpcshell-e10s-5
+    result: success
+  - classification: not classified
+    duration: 193
+    label: build-signing-win64-aarch64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 654
+    label: build-linux64-rusttests/debug
+    result: success
+  - classification: not classified
+    duration: 1425
+    label: build-win32-rusttests/opt
+    result: success
+  - classification: intermittent
+    duration: 5530
+    label: test-windows7-32/debug-web-platform-tests-e10s-11
+    result: testfailed
+  - classification: not classified
+    duration: 2558
+    label: test-android-em-4.3-arm7-api-16/pgo-mochitest-1proc-19
+    result: success
+  - classification: not classified
+    duration: 1330
+    label: test-macosx64-shippable/opt-mochitest-browser-chrome-e10s-5
+    result: success
+  - classification: not classified
+    duration: 1775
+    label: test-macosx64-shippable/opt-reftest-e10s-2
+    result: success
+  - classification: not classified
+    duration: 636
+    label: repackage-msi-win32-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 360
+    label: l10n-macosx64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 128
+    label: source-test-jsshell-bench-web-tooling-sm
+    result: success
+  - classification: not classified
+    duration: 3615
+    label: build-win64-fuzzing/debug
+    result: success
+  - classification: not classified
+    duration: 4354
+    label: build-win64-aarch64-shippable-no-eme/opt
+    result: success
+  - classification: not classified
+    duration: 4909
+    label: build-win64-aarch64/opt
+    result: success
+  - classification: not classified
+    duration: 1726
+    label: build-win64-mingwclang/debug
+    result: success
+  - classification: not classified
+    duration: 1714
+    label: build-win32-mingwclang/debug
+    result: success
+  - classification: not classified
+    duration: 21
+    label: repackage-signing-win64-shippable/opt
+    result: success
+  - classification: fixed by commit
+    duration: 1359
+    label: test-windows7-32/debug-test-verify-e10s
+    result: testfailed
+  - classification: not classified
+    duration: 1766
+    label: build-linux64-fuzzing/debug
+    result: success
+  - classification: not classified
+    duration: 4958
+    label: hazard-linux64-haz/debug
+    result: success
+  - classification: not classified
+    duration: 1035
+    label: test-windows7-32-shippable/opt-test-verify-gpu-e10s
+    result: success
+  - classification: not classified
+    duration: 205
+    label: test-macosx64/debug-marionette-media-e10s
+    result: success
+  - classification: not classified
+    duration: 1243
+    label: test-windows10-64-shippable-qr/opt-web-platform-tests-reftests-e10s-1
+    result: success
+  - classification: not classified
+    duration: 167
+    label: build-signing-win64-aarch64/opt
+    result: success
+  - classification: not classified
+    duration: 254
+    label: diff-artifact-win64-aarch64-eme-validation
+    result: success
+  - classification: not classified
+    duration: 1865
+    label: test-android-em-4.3-arm7-api-16/pgo-geckoview-junit-e10s-3
+    result: success
+  - classification: not classified
+    duration: 1368
+    label: test-linux64/debug-web-platform-tests-reftests-e10s-4
+    result: success
+  - classification: not classified
+    duration: 1659
+    label: test-linux64-asan/opt-mochitest-browser-chrome-e10s-3
+    result: success
+  - classification: not classified
+    duration: 1662
+    label: test-linux64-asan/opt-mochitest-devtools-chrome-e10s-3
+    result: success
+  - classification: not classified
+    duration: 181
+    label: build-signing-macosx64-shippable/opt
+    result: success
+  - classification: not classified
+    duration: 1481
+    label: test-windows10-64/debug-web-platform-tests-reftests-e10s-1
+    result: success
+  - classification: not classified
+    duration: 1024
+    label: build-linux64-aarch64/opt
+    result: success
+  - classification: not classified
+    duration: 2622
+    label: build-win64-aarch64/debug
+    result: success
+  - classification: not classified
+    duration: 2653
+    label: valgrind-linux64-valgrind/opt
+    result: success
+  - classification: not classified
+    duration: 976
+    label: test-android-em-7.0-x86_64/opt-mochitest-e10s-2
+    result: success
+  - classification: fixed by commit
+    duration: 918
+    label: test-android-em-7.0-x86_64/opt-xpcshell-1proc-1
+    result: testfailed
+  - classification: not classified
+    duration: 158
+    label: test-macosx64-shippable/opt-mochitest-devtools-webreplay-e10s
+    result: success
+  - classification: not classified
+    duration: 135
+    label: test-linux64/debug-test-verify-gpu-e10s
+    result: success
+  - classification: not classified
+    duration: 2136
+    label: test-macosx64-shippable-qr/opt-reftest-e10s-2
+    result: success
+  - classification: fixed by commit
+    duration: 1597
+    label: test-windows10-64/debug-mochitest-browser-chrome-e10s-4
+    result: testfailed
+  - classification: not classified
+    duration: 1412
+    label: build-linux64-asan/debug
+    result: success
+  - classification: not classified
+    duration: 341
+    label: source-test-doc-generate
+    result: success
+  - classification: not classified
+    duration: 1577
+    label: test-macosx64/debug-mochitest-browser-chrome-e10s-4
+    result: success
+expected:
+- - Tasks Scheduled
+  - Tasks Total
+  - Percentage
+  - Total Hours (scheduled)
+  - Backed Out
+  - Regressions (possible)
+  - Regressions (likely)
+  - Caught
+  - Missed
+- - 222
+  - 2076
+  - 10.7
+  - 90
+  - false
+  - 0
+  - 0
+  - 0
+  - 0
