@@ -3,7 +3,7 @@
 
 # ci-recipes
 
-ci is a repository of [ActiveData recipes][0]. A recipe is a small
+ci-recipes is a repository of [ActiveData recipes][0]. A recipe is a small
 snippet that runs one or more active data queries and returns the output. Queries can sometimes be
 modified by command line arguments and output can sometimes be post-processed.
 
