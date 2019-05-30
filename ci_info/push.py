@@ -95,6 +95,15 @@ class Push:
         return bool(self.backedoutby)
 
     @property
+    def pushdate(self):
+        """The push date.
+
+        Returns:
+            int: The push date in ms since the epoch.
+        """
+        return self._hgmo['pushdate'][0]
+
+    @property
     def pushid(self):
         """The push id.
 
@@ -342,3 +351,6 @@ class Push:
         """
         url = HGMO_JSON_URL.format(branch=self.branch, rev=self.rev)
         return requests.get(url).json()
+
+    def __repr__(self):
+        return f"{super(Push, self).__repr__()} rev='{self.rev}'"

@@ -23,7 +23,9 @@ homepage = "https://github.com/ahal/ci-recipes"
 
 [tool.poetry.dependencies]
 python = "^3.7"
-adr = "^0.15.1"
+adr = "^0.15.2"
+loguru = "^0.2.5"
+icecream = "^1.5"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.7.7"

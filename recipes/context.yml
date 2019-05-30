@@ -1,9 +1,22 @@
+branch:
+  flags: ['-B', '--branch']
+  default: "autoland"
+  choices: ["mozilla-central", "mozilla-inbound", "autoland", "beta", "release"]
+  type: str
+  help: "Branch to query results from"
+
 format:
   flags: ['--format']
-  type: str
   default: 'table'
   choices: ['table', 'json']
+  type: str
   help: "format of result"
+
+from_date:
+  flags: ['--from']
+  default: 'today-week'
+  type: validdatetime
+  help: "Starting date to pull data from, defaults to a week ago"
 
 limit:
   flags: ['--limit']
@@ -13,5 +26,11 @@ limit:
 
 rev:
   flags: ['-r', '--rev']
-  default: '5b33b070378a'
+  type: str
   help: "Revision to limit results to"
+
+to_date:
+  flags: ['--to']
+  default: 'eod'  # end of day
+  type: validdatetime
+  help: "Ending date to pull data from, defaults to end of day"

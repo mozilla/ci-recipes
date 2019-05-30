@@ -1,0 +1,14 @@
+from: repo
+groupby:
+    - {name: pushid, value: push.id}
+select:
+    - {name: rev, value: changeset.id, aggregate: union}
+    - {name: parents, value: parents, aggregate: union}
+sort: push.id
+where:
+    and:
+        - eq: {branch.name: {$eval: branch}}
+        - gte: [push.date, {date: {$eval: from_date}}]
+        - lte: [push.date, {date: {$eval: to_date}}]
+limit: 10000
+format: table
