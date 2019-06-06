@@ -77,7 +77,7 @@ class Scheduler:
             logger.debug(f"Loading target tasks from cache")
             return config.cache.get(key)
 
-        logger.debug(f"Generating target tasks for {self.name}")
+        logger.debug(f"Generating target tasks")
         cmd = ["./mach", "taskgraph", "optimized", "--fast"]
         env = os.environ.copy()
         env.update(
@@ -164,7 +164,7 @@ def run(args):
             hg(["update", push.rev])
 
             for scheduler in schedulers:
-                logger.debug(f"Scheduler {scheduler.name}")
+                logger.opt(ansi=True).debug(f"<cyan>Scheduler {scheduler.name}</cyan>")
                 try:
                     scheduler.analyze(push)
                 except MissingDataError:
