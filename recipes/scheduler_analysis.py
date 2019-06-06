@@ -11,6 +11,8 @@ import os
 import subprocess
 import sys
 from argparse import Namespace
+from collections import defaultdict
+from dataclasses import dataclass
 from pathlib import Path
 
 from adr import config
@@ -38,26 +40,45 @@ RUN_CONTEXTS = [
 GECKO = None
 
 
+@dataclass
+class Score:
+    primary_backouts: int = 0
+    secondary_backouts: int = 0
+    tasks: int = 0
+
+    @property
+    def secondary_backout_rate(self):
+        total_backouts = self.primary_backouts + self.secondary_backouts
+        if not total_backouts:
+            return 0
+
+        return float(self.secondary_backouts) / total_backouts
+
+    @property
+    def scheduler_efficiency(self):
+        return round(100000 / (self.secondary_backout_rate * self.tasks), 2)
+
+
 class Scheduler:
     def __init__(self, path):
         self.path = Path(path)
         self.name = self.path.stem
-
-        self.total_tasks = 0
-        self.regressions_caught = 0
-        self.regressions_missed = 0
+        self.score = Score()
 
     def get_target_tasks(self, push):
         if self.name == "baseline":
             return push.target_task_labels
 
-        key = f"scheduler.{self.name}.{push.rev}"
+        with open(self.path, "r") as fh:
+            scheduler_hash = config.cache._hash(fh.read())
+
+        key = f"scheduler.{push.rev}.{scheduler_hash}"
         if config.cache.has(key):
-            logger.debug(f"loading target tasks from cache")
+            logger.debug(f"Loading target tasks from cache")
             return config.cache.get(key)
 
-        logger.info(f"generating target tasks for {self.name}")
-        cmd = ["./mach", "taskgraph", "optimized"]
+        logger.debug(f"Generating target tasks for {self.name}")
+        cmd = ["./mach", "taskgraph", "optimized", "--fast"]
         env = os.environ.copy()
         env.update(
             {
@@ -67,7 +88,7 @@ class Scheduler:
         )
         output = subprocess.check_output(
             cmd, env=env, cwd=GECKO, stderr=subprocess.DEVNULL
-        )
+        ).decode("utf8")
         target_tasks = set(output.splitlines())
 
         config.cache.put(key, target_tasks, 43200)  # keep results for 30 days
@@ -75,15 +96,18 @@ class Scheduler:
 
     def analyze(self, push):
         target_tasks = self.get_target_tasks(push)
+        self.score.tasks += len(target_tasks)
 
-        self.total_tasks += len(target_tasks)
-        self.regressions_caught += len(push.likely_regressions & target_tasks)
-        self.regressions_missed += len(push.likely_regressions - target_tasks)
+        if push.backedout:
+            if push.likely_regressions & target_tasks:
+                self.score.primary_backouts += 1
+            else:
+                self.score.secondary_backouts += 1
 
 
 def hg(args):
     cmd = ["hg"] + args
-    logger.debug(f"running command: {' '.join(cmd)}")
+    logger.debug(f"Running: {' '.join(cmd)}")
     return subprocess.check_output(cmd, cwd=GECKO).decode("utf8")
 
 
@@ -107,13 +131,11 @@ def make_push_objects(**kwargs):
 
 
 def run(args):
-    global GECKO
+    global GECKO, logger
     GECKO = args.gecko_path
     if not GECKO:
         logger.error("Must specify --gecko-path.")
         sys.exit(1)
-
-    logger.debug("Starting scheduler analysis with:\n{args}", args=ic.format(args))
 
     # initialize schedulers to analyze
     cwd = os.getcwd()
@@ -133,26 +155,46 @@ def run(args):
         from_date=args.from_date, to_date=args.to_date, branch=args.branch
     )
     orig_rev = hg(["log", "-r", ".", "-T", "{node}"])
-    logger.debug(f"original revision: {orig_rev}")
+    logger.debug(f"Found previous revision: {orig_rev}")
 
     try:
         for i, push in enumerate(pushes):
-            logger.info(f"analyzing {push.rev} ({i+1}/{len(pushes)})")
+            logger.info(f"Analyzing https://treeherder.mozilla.org/#/jobs?repo=autoland&revision={push.rev} ({i+1}/{len(pushes)})")  # noqa
+
             hg(["update", push.rev])
 
             for scheduler in schedulers:
-                logger.debug(f"analyzing scheduler '{scheduler.name}'")
+                logger.debug(f"Scheduler {scheduler.name}")
                 try:
                     scheduler.analyze(push)
                 except MissingDataError:
                     logger.warning(f"MissingDataError: Skipping {push.rev}")
+
     finally:
         logger.debug("restoring repo")
         hg(["update", orig_rev])
 
-    header = ["Scheduler", "Total Tasks", "Regressions Caught", "Regressions Missed"]
-    data = [header]
-    for s in schedulers:
-        data.append([s.name, s.total_tasks, s.regressions_caught, s.regressions_missed])
+    header = [
+        "Scheduler",
+        "Total Tasks",
+        "Primary Backouts",
+        "Secondary Backouts",
+        "Secondary Backout Rate",
+        "Scheduler Efficiency",
+    ]
 
+    data = []
+    for sched in schedulers:
+        s = sched.score
+        data.append([
+            sched.name,
+            s.tasks,
+            s.primary_backouts,
+            s.secondary_backouts,
+            s.secondary_backout_rate,
+            s.scheduler_efficiency,
+        ])
+
+    data.sort(key=lambda x: x[-1], reverse=True)
+    data.insert(0, header)
     return data
