@@ -36,7 +36,7 @@ For a list of recipes:
 
 For recipe specific options see:
 
-    $ adr <recipe> -- --help
+    $ adr recipe <recipe> -- --help
 
 To serve the web app locally:
 
