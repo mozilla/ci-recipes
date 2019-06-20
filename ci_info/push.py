@@ -350,7 +350,9 @@ class Push:
             dict: Information regarding this push.
         """
         url = HGMO_JSON_URL.format(branch=self.branch, rev=self.rev)
-        return requests.get(url).json()
+        r = requests.get(url)
+        r.raise_for_status()
+        return r.json()
 
     def __repr__(self):
         return f"{super(Push, self).__repr__()} rev='{self.rev}'"
