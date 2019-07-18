@@ -33,7 +33,14 @@ RUN_CONTEXTS = [
             "dest": "gecko_path",
             "default": os.environ.get("GECKO_PATH"),
             "help": "Path to gecko (i.e mozilla-central).",
-        }
+        },
+        "clone": {
+            "flags": ["--clone"],
+            "dest": "clone",
+            "action": "store_true",
+            "default": False,
+            "help": "Clone Gecko if the specified path does not exist.",
+        },
     }
 ]
 
@@ -130,12 +137,25 @@ def make_push_objects(**kwargs):
     return pushes
 
 
+def clone_gecko():
+    cmd = ['hg', 'clone', 'https://hg.mozilla.org/mozilla-unified', GECKO]
+    logger.debug(f"Running: {' '.join(cmd)}")
+    subprocess.call(cmd)
+
+
 def run(args):
     global GECKO, logger
     GECKO = args.gecko_path
     if not GECKO:
         logger.error("Must specify --gecko-path.")
         sys.exit(1)
+
+    if not Path(GECKO).is_dir():
+        if args.clone:
+            clone_gecko()
+        else:
+            logger.error(f"Gecko path '{GECKO}' does not exist! Pass --clone to clone it to this location.")
+            sys.exit(1)
 
     # initialize schedulers to analyze
     cwd = os.getcwd()
