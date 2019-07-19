@@ -7,6 +7,7 @@ from typing import List
 import requests
 from adr.query import run_query
 from adr.util.memoize import memoize, memoized_property
+from loguru import logger
 
 HGMO_JSON_URL = "https://hg.mozilla.org/integration/{branch}/rev/{rev}?style=json"
 
@@ -326,7 +327,7 @@ class Push:
         Returns:
             list: A list of urls.
         """
-        return run_query('decision_artifacts', Namespace(rev=self.rev))['data'][0]['artifacts']
+        return run_query('decision_artifacts', Namespace(rev=self.rev))['data']
 
     @memoize
     def _get_decision_artifact(self, name):
@@ -338,9 +339,12 @@ class Push:
         Returns:
             dict: JSON representation of the artifact.
         """
-        for url in self._decision_artifact_urls:
-            if url.rsplit('/', 1)[1] == name:
-                return requests.get(url).json()
+        for decision in self._decision_artifact_urls:
+            for url in decision['artifacts']:
+                if url.rsplit('/', 1)[1] == name:
+                    return requests.get(url).json()
+        logger.warning(f"No decision task with artifact {name} on {self.rev}.")
+        return []
 
     @memoized_property
     def _hgmo(self):
