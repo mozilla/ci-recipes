@@ -10,7 +10,9 @@ import json
 import os
 
 from adr import config
+from adr.errors import MissingDataError
 from adr.query import run_query
+from loguru import logger
 
 from ci_info import Push, make_push_objects
 
@@ -42,11 +44,18 @@ def run(args):
         if push.rev in already_done:
             continue
 
-        data.append([
-            push.rev,
-            list(push.task_labels),
-            list(push.possible_regressions),
-            list(push.likely_regressions),
-        ])
+        try:
+            data.append([
+                push.rev,
+                list(push.task_labels),
+                list(push.possible_regressions),
+                list(push.likely_regressions),
+            ])
+        except MissingDataError:
+            logger.warning(f"Tasks for push {push.rev} can't be found on ActiveData")
+            continue
+        except Exception as e:
+            logger.error(e)
+            continue
 
     return data
