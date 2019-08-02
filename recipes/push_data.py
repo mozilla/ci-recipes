@@ -6,7 +6,8 @@ Generate test-related data about pushes.
     adr push_data [--branch <branch>] [--from <date> [--to <date>]]
 """
 
-from argparse import Namespace
+import json
+import os
 
 from adr import config
 from adr.query import run_query
@@ -20,18 +21,27 @@ def run(args):
         from_date=args.from_date, to_date=args.to_date, branch=args.branch
     )
 
-    header = [
-        'Revision',
-        'All Tasks',
-        'Regressions (possible)',
-        'Regressions (likely)',
-    ]
+    if config.output_file is not None and os.path.exists(config.output_file):
+        with open(config.output_file, "r") as f:
+            data = json.load(f)
+    else:
+        header = [
+            'Revision',
+            'All Tasks',
+            'Regressions (possible)',
+            'Regressions (likely)',
+        ]
 
-    data = [
-        header
-    ]
+        data = [
+            header
+        ]
+
+    already_done = set(row[0] for row in data[1:])
 
     for push in pushes:
+        if push.rev in already_done:
+            continue
+
         data.append([
             push.rev,
             list(push.task_labels),
