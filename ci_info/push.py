@@ -10,6 +10,8 @@ from adr.util.memoize import memoize, memoized_property
 from loguru import logger
 
 HGMO_JSON_URL = "https://hg.mozilla.org/integration/{branch}/rev/{rev}?style=json"
+TASKGRAPH_ARTIFACT_URL = "https://index.taskcluster.net/v1/task/gecko.v2.autoland.revision.{rev}.taskgraph.decision/artifacts/public/{artifact}"
+SHADOW_SCHEDULER_ARTIFACT_URL = "https://tools.taskcluster.net/index/gecko.v2.try.revision.{rev}.source/shadow-scheduler-{name}/artifacts/public/shadow-scheduler/optimzied_tasks.list"
 
 
 class Status(Enum):
@@ -179,7 +181,7 @@ class Push:
             set: A set of task labels (str).
         """
         tasks = self._get_decision_artifact('task-graph.json').values()
-        return set([t['label'] for t in tasks])
+        return {t['label'] for t in tasks}
 
     @property
     def unscheduled_task_labels(self):
@@ -320,14 +322,35 @@ class Push:
         """
         return set([label for label, count in self.regressions.items() if count == 0])
 
-    @memoized_property
-    def _decision_artifact_urls(self):
-        """All artifact urls from the Decision task of this push.
+    @memoize
+    def get_shadow_scheduler_tasks(self, name):
+        """Returns all tasks the given shadow scheduler would have scheduler,
+        or None if the given scheduler didn't run.
+
+        Args:
+            name (str): The name of the shadow scheduler to query.
+
+        Returns:
+            list: All task labels that would have been scheduler or None.
+        """
+        if name not in self._shadow_scheduler_artifacts:
+            return None
+
+        r = requests.get(self._shadow_scheduler_artifacts[name])
+        tasks = r.text
+        return set(tasks.splitlines())
+
+    @memoize
+    def _get_artifact_urls_from_label(self, label):
+        """All artifact urls from any task whose label contains ``label``.
+
+        Args:
+            label (str): Substring to filter task labels by.
 
         Returns:
             list: A list of urls.
         """
-        return run_query('decision_artifacts', Namespace(rev=self.rev))['data']
+        return run_query('label_artifacts', Namespace(rev=self.rev, label=label))['data']
 
     @memoize
     def _get_decision_artifact(self, name):
@@ -339,12 +362,31 @@ class Push:
         Returns:
             dict: JSON representation of the artifact.
         """
-        for decision in self._decision_artifact_urls:
-            for url in decision['artifacts']:
-                if url.rsplit('/', 1)[1] == name:
-                    return requests.get(url).json()
-        logger.warning(f"No decision task with artifact {name} on {self.rev}.")
-        return []
+        url = TASKGRAPH_ARTIFACT_URL.format(rev=self.rev, artifact=name)
+        r = requests.get(url)
+        if r.status_code != 200:
+            logger.warning(f"No decision task with artifact {name} on {self.rev}.")
+            return []
+        return r.json()
+
+    @memoized_property
+    def _shadow_scheduler_artifacts(self):
+        """Get the tasks artifact from the shadow scheduler task called 'name'.
+
+        Returns:
+            dict: A mapping of {<shadow scheduler name>: <tasks>}.
+        """
+        artifacts = {}
+        for task in self._get_artifact_urls_from_label('shadow-scheduler'):
+            label = task['label']
+            found_url = None
+            for url in task['artifacts']:
+                if url.rsplit('/', 1)[1] == 'optimized_tasks.list':
+                    found_url = url
+            index = label.find('shadow-scheduler-') + len('shadow-scheduler-')
+            artifacts[label[index:]] = found_url
+
+        return artifacts
 
     @memoized_property
     def _hgmo(self):
