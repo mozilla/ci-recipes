@@ -333,10 +333,15 @@ class Push:
         Returns:
             list: All task labels that would have been scheduler or None.
         """
-        if name not in self._shadow_scheduler_artifacts:
-            return None
+        # First look for an index.
+        url = SHADOW_SCHEDULER_ARTIFACT_URL.format(rev=self.rev, name=name)
+        r = requests.get(url)
 
-        r = requests.get(self._shadow_scheduler_artifacts[name])
+        if r.status_code != 200:
+            if name not in self._shadow_scheduler_artifacts:
+                return None
+            r = requests.get(self._shadow_scheduler_artifacts[name])
+
         tasks = r.text
         return set(tasks.splitlines())
 
