@@ -402,3 +402,22 @@ class Push:
 
     def __repr__(self):
         return f"{super(Push, self).__repr__()} rev='{self.rev}'"
+
+
+def make_push_objects(**kwargs):
+    data = run_query("push_revisions", Namespace(**kwargs))["data"]
+
+    pushes = []
+    cur = prev = None
+    for pushid, revs, parents in data:
+        topmost = list(set(revs) - set(parents))[0]
+
+        cur = Push(topmost)
+        if prev:
+            # avoids the need to query hgmo to find parent pushes
+            cur._parent = prev
+
+        pushes.append(cur)
+        prev = cur
+
+    return pushes

@@ -22,7 +22,7 @@ from adr.util.memoize import memoized_property
 from icecream import ic
 from loguru import logger
 
-from ci_info import Push
+from ci_info import Push, make_push_objects
 
 here = Path(__file__).parent.resolve()
 
@@ -146,25 +146,6 @@ def hg(args):
     cmd = ["hg"] + args
     logger.debug(f"Running: {' '.join(cmd)}")
     return subprocess.check_output(cmd, cwd=GECKO).decode("utf8")
-
-
-def make_push_objects(**kwargs):
-    data = run_query("push_revisions", Namespace(**kwargs))["data"]
-
-    pushes = []
-    cur = prev = None
-    for pushid, revs, parents in data:
-        topmost = list(set(revs) - set(parents))[0]
-
-        cur = Push(topmost)
-        if prev:
-            # avoids the need to query hgmo to find parent pushes
-            cur._parent = prev
-
-        pushes.append(cur)
-        prev = cur
-
-    return pushes
 
 
 def clone_gecko():
