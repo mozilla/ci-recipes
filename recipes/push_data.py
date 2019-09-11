@@ -13,6 +13,7 @@ from adr import config
 from adr.errors import MissingDataError
 from adr.query import run_query
 from loguru import logger
+from tqdm import tqdm
 
 from ci_info import Push, make_push_objects
 
@@ -34,7 +35,7 @@ def run(args):
         header
     ]
 
-    for push in pushes:
+    for push in tqdm(pushes):
         key = f"push_data.{push.rev}"
 
         if config.cache.has(key):
