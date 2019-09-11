@@ -23,39 +23,37 @@ def run(args):
         from_date=args.from_date, to_date=args.to_date, branch=args.branch
     )
 
-    if config.output_file is not None and os.path.exists(config.output_file):
-        with open(config.output_file, "r") as f:
-            data = json.load(f)
-    else:
-        header = [
-            'Revision',
-            'All Tasks',
-            'Regressions (possible)',
-            'Regressions (likely)',
-        ]
+    header = [
+        'Revision',
+        'All Tasks',
+        'Regressions (possible)',
+        'Regressions (likely)',
+    ]
 
-        data = [
-            header
-        ]
-
-    already_done = set(row[0] for row in data[1:])
+    data = [
+        header
+    ]
 
     for push in pushes:
-        if push.rev in already_done:
-            continue
+        key = f"push_data.{push.rev}"
 
-        try:
-            data.append([
-                push.rev,
-                list(push.task_labels),
-                list(push.possible_regressions),
-                list(push.likely_regressions),
-            ])
-        except MissingDataError:
-            logger.warning(f"Tasks for push {push.rev} can't be found on ActiveData")
-            continue
-        except Exception as e:
-            logger.error(e)
-            continue
+        if config.cache.has(key):
+            data.append(config.cache.get(key))
+        else:
+            try:
+                value = [
+                    push.rev,
+                    list(push.task_labels),
+                    list(push.possible_regressions),
+                    list(push.likely_regressions),
+                ]
+                data.append(value)
+                config.cache.forever(key, value)
+            except MissingDataError:
+                logger.warning(f"Tasks for push {push.rev} can't be found on ActiveData")
+                continue
+            except Exception as e:
+                logger.error(e)
+                continue
 
     return data
