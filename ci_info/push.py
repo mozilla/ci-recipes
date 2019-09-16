@@ -5,13 +5,14 @@ from enum import Enum
 from typing import List
 
 import requests
+from adr.errors import MissingDataError
 from adr.query import run_query
 from adr.util.memoize import memoize, memoized_property
 from loguru import logger
 
 HGMO_JSON_URL = "https://hg.mozilla.org/integration/{branch}/rev/{rev}?style=json"
 TASKGRAPH_ARTIFACT_URL = "https://index.taskcluster.net/v1/task/gecko.v2.autoland.revision.{rev}.taskgraph.decision/artifacts/public/{artifact}"
-SHADOW_SCHEDULER_ARTIFACT_URL = "https://tools.taskcluster.net/index/gecko.v2.try.revision.{rev}.source/shadow-scheduler-{name}/artifacts/public/shadow-scheduler/optimzied_tasks.list"
+SHADOW_SCHEDULER_ARTIFACT_URL = "https://index.taskcluster.net/v1/task/gecko.v2.autoland.revision.{rev}.source/shadow-scheduler-{name}/artifacts/public/shadow-scheduler/optimized_tasks.list"
 
 
 class Status(Enum):
@@ -78,6 +79,8 @@ class Push:
         """
         self.rev = rev
         self.branch = branch
+        self._id = None
+        self._date = None
 
     @property
     def backedoutby(self):
@@ -98,22 +101,30 @@ class Push:
         return bool(self.backedoutby)
 
     @property
-    def pushdate(self):
+    def date(self):
         """The push date.
 
         Returns:
             int: The push date in ms since the epoch.
         """
-        return self._hgmo['pushdate'][0]
+        if self._date:
+            return self._date
+
+        self._date = self._hgmo['pushdate'][0]
+        return self._date
 
     @property
-    def pushid(self):
+    def id(self):
         """The push id.
 
         Returns:
             int: The push id.
         """
-        return self._hgmo['pushid']
+        if self._id:
+            return self._id
+
+        self._id = self._hgmo['pushid']
+        return self._id
 
     @memoized_property
     def parent(self):
@@ -126,7 +137,7 @@ class Push:
         while True:
             for rev in other._hgmo['parents']:
                 parent = Push(rev)
-                if parent.pushid != self.pushid:
+                if parent.id != self.id:
                     return parent
                 other = parent
 
@@ -371,7 +382,7 @@ class Push:
         r = requests.get(url)
         if r.status_code != 200:
             logger.warning(f"No decision task with artifact {name} on {self.rev}.")
-            return []
+            raise MissingDataError("No decision task on {self.rev}!")
         return r.json()
 
     @memoized_property
@@ -383,6 +394,9 @@ class Push:
         """
         artifacts = {}
         for task in self._get_artifact_urls_from_label('shadow-scheduler'):
+            if 'artifacts' not in task:
+                continue
+
             label = task['label']
             found_url = None
             for url in task['artifacts']:
@@ -414,12 +428,15 @@ def make_push_objects(**kwargs):
 
     pushes = []
     cur = prev = None
-    for pushid, revs, parents in data:
+    for pushid, date, revs, parents in data:
         topmost = list(set(revs) - set(parents))[0]
 
         cur = Push(topmost)
+
+        # avoids the need to query hgmo to find this info
+        cur._id = pushid
+        cur._date = date
         if prev:
-            # avoids the need to query hgmo to find parent pushes
             cur._parent = prev
 
         pushes.append(cur)

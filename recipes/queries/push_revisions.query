@@ -1,6 +1,7 @@
 from: repo
 groupby:
     - {name: pushid, value: push.id}
+    - {name: date, value: push.date}
 select:
     - {name: rev, value: changeset.id, aggregate: union}
     - {name: parents, value: parents, aggregate: union}
@@ -12,3 +13,15 @@ where:
         - lte: [push.date, {date: {$eval: to_date}}]
 limit: 10000
 format: table
+
+context:
+    from_date:
+        flags: ["--from"]
+        default: "today-week"
+        type: validdatetime
+        help: "Starting date to pull data from, defaults to a week ago"
+    to_date:
+        flags: ["--to"]
+        default: "eod"
+        type: validdatetime
+        help: "Ending date to pull data from, defaults to end of day"
