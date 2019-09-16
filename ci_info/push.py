@@ -424,22 +424,32 @@ class Push:
 
 
 def make_push_objects(**kwargs):
-    data = run_query("push_revisions", Namespace(**kwargs))["data"]
+    push_min, push_max = run_query("push_revision_count", Namespace(**kwargs))["data"][0]
+
+    CHUNK_SIZE = 10000
+    pushes_groups = [(i, min(i+CHUNK_SIZE-1, push_max)) for i in range(push_min, push_max, CHUNK_SIZE)]
 
     pushes = []
     cur = prev = None
-    for pushid, date, revs, parents in data:
-        topmost = list(set(revs) - set(parents))[0]
 
-        cur = Push(topmost)
+    for pushes_group in pushes_groups:
+        kwargs["from_push"] = pushes_group[0]
+        kwargs["to_push"] = pushes_group[1]
 
-        # avoids the need to query hgmo to find this info
-        cur._id = pushid
-        cur._date = date
-        if prev:
-            cur._parent = prev
+        data = run_query("push_revisions", Namespace(**kwargs))["data"]
 
-        pushes.append(cur)
-        prev = cur
+        for pushid, date, revs, parents in data:
+            topmost = list(set(revs) - set(parents))[0]
+
+            cur = Push(topmost)
+            
+            # avoids the need to query hgmo to find this info
+            cur._id = pushid
+            cur._date = date
+            if prev:
+                cur._parent = prev
+
+            pushes.append(cur)
+            prev = cur
 
     return pushes
