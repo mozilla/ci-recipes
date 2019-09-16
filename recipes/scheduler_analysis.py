@@ -13,6 +13,7 @@ import sys
 from argparse import Namespace
 from collections import defaultdict
 from dataclasses import dataclass
+from datetime import datetime
 from pathlib import Path
 
 from adr import config
@@ -65,11 +66,26 @@ class Score:
         if not total_backouts:
             return 0
 
-        return float(self.secondary_backouts) / total_backouts
+        return round(float(self.secondary_backouts) / total_backouts, 2)
 
     @property
     def scheduler_efficiency(self):
-        return round(100000 / (self.secondary_backout_rate * self.tasks), 2)
+        rate = self.secondary_backout_rate * self.tasks
+        if rate == 0:
+            return 0
+        return round(float(100000) / rate, 2)
+
+    def update(self, other):
+        self.primary_backouts += other.primary_backouts
+        self.secondary_backouts += other.secondary_backouts
+        self.tasks += other.tasks
+
+    def as_dict(self):
+        return {
+            'primary_backouts': self.primary_backouts,
+            'secondary_backouts': self.secondary_backouts,
+            'tasks': self.tasks
+        }
 
 
 class Scheduler:
@@ -94,27 +110,29 @@ class Scheduler:
             key += f".{scheduler_hash}"
 
         if config.cache.has(key):
-            logger.debug(f"Loading target tasks from cache")
+            logger.opt(ansi=True).info(f"<cyan>{self.name} loaded from cache</cyan>")
             return config.cache.get(key)
 
         # If we're baseline simply use the scheduled_task_labels.
         if self.name == "baseline":
             tasks = push.scheduled_task_labels
+            logger.opt(ansi=True).info(f"<cyan>{self.name} loaded from artifact</cyan>")
             config.cache.put(key, tasks, 43200)  # keep results for 30 days
             return tasks
 
         # Next check if a shadow scheduler matching our name ran on the push.
         tasks = push.get_shadow_scheduler_tasks(self.name)
         if tasks is not None:
+            logger.opt(ansi=True).info(f"<cyan>{self.name} loaded from artifact</cyan>")
             config.cache.put(key, tasks, 43200)  # keep results for 30 days
             return tasks
 
         # Finally fallback to generating the tasks locally.
         if not GECKO or not self.path:
-            logger.error(f"error: shadow scheduler '{self.name}' not found!")
-            sys.exit(1)
+            logger.warning(f"warning: shadow scheduler '{self.name}' not found!")
+            raise MissingDataError
 
-        logger.debug(f"Generating target tasks")
+        logger.info(f"Generating target tasks")
         cmd = ["./mach", "taskgraph", "optimized", "--fast"]
         env = os.environ.copy()
         env.update(
@@ -128,18 +146,23 @@ class Scheduler:
         ).decode("utf8")
         tasks = set(output.splitlines())
 
+        logger.opt(ansi=True).info(f"<cyan>{self.name} loaded from local repository</cyan>")
         config.cache.put(key, tasks, 43200)  # keep results for 30 days
         return tasks
 
     def analyze(self, push):
         tasks = self.get_tasks(push)
-        self.score.tasks += len(tasks)
+        score = Score(tasks=len(tasks))
 
         if push.backedout:
             if push.likely_regressions & tasks:
-                self.score.primary_backouts += 1
+                score.primary_backouts += 1
             else:
-                self.score.secondary_backouts += 1
+                score.secondary_backouts += 1
+
+        logger.debug(f"{score}")
+        self.score.update(score)
+        return score
 
 
 def hg(args):
@@ -168,38 +191,66 @@ def run(args):
 
     schedulers = []
     for s in args.strategies:
-        logger.debug(f"Creating scheduler using strategy {s}")
+        logger.info(f"Creating scheduler using strategy {s}")
         schedulers.append(Scheduler(s))
 
     # use what was actually scheduled as a baseline comparison
-    schedulers.append(Scheduler("baseline"))
+    schedulers.append(Scheduler('baseline'))
 
-    # compute pushes in range
+    # compute dates in range
     pushes = make_push_objects(
         from_date=args.from_date, to_date=args.to_date, branch=args.branch
     )
 
+    total_pushes = len(pushes)
+    logger.info(f"Found {total_pushes} pushes in specified range.")
+    pushes_by_date = defaultdict(list)
+    for push in pushes:
+        date = datetime.utcfromtimestamp(push.date).strftime('%Y-%m-%d')
+        pushes_by_date[date].append(push)
+
     if GECKO:
         orig_rev = hg(["log", "-r", ".", "-T", "{node}"])
-        logger.debug(f"Found previous revision: {orig_rev}")
+        logger.info(f"Found previous revision: {orig_rev}")
 
     try:
-        for i, push in enumerate(pushes):
-            logger.info(f"Analyzing https://treeherder.mozilla.org/#/jobs?repo=autoland&revision={push.rev} ({i+1}/{len(pushes)})")  # noqa
+        i = 0
+        for date in sorted(pushes_by_date):
+            pushes = pushes_by_date[date]
+            logger.info(f"Analyzing pushes from {date} ({len(pushes)} pushes)")
 
-            if GECKO:
-                hg(["update", push.rev])
+            _hash = config.cache._hash(''.join([p.rev for p in pushes]) +
+                                       ''.join([s.name for s in schedulers]))
+            key = f"scheduler_analysis.{date}.{_hash}"
+            if config.cache.has(key):
+                logger.info(f"Loading results for {date} from cache")
+                data = config.cache.get(key)
 
-            for scheduler in schedulers:
-                logger.opt(ansi=True).debug(f"<cyan>Scheduler {scheduler.name}</cyan>")
-                try:
-                    scheduler.analyze(push)
-                except MissingDataError:
-                    logger.warning(f"MissingDataError: Skipping {push.rev}")
+                for s in schedulers:
+                    s.score.update(Score(**data[s.name]))
+                i += len(pushes)
+                continue
+
+            scores = defaultdict(Score)
+            for push in sorted(pushes, key=lambda p: p.id):
+                i += 1
+                logger.info(f"Analyzing https://treeherder.mozilla.org/#/jobs?repo=autoland&revision={push.rev} ({i}/{total_pushes})")  # noqa
+
+                if GECKO:
+                    hg(["update", push.rev])
+
+                for s in schedulers:
+                    try:
+                        scores[s.name].update(s.analyze(push))
+                    except MissingDataError:
+                        logger.warning(f"MissingDataError: Skipping {push.rev}")
+
+            config.cache.put(key, {k: v.as_dict() for k, v in scores.items()}, 43200)  # 30 days
+
 
     finally:
         if GECKO:
-            logger.debug("restoring repo")
+            logger.info("restoring repo")
             hg(["update", orig_rev])
 
     header = [
