@@ -8,7 +8,7 @@ sort: push.id
 where:
     and:
         - eq: {branch.name: {$eval: branch}}
-        - gte: [push.date, {date: {$eval: from_date}}]
-        - lte: [push.date, {date: {$eval: to_date}}]
+        - gte: [push.id, {$eval: from_push}]
+        - lte: [push.id, {$eval: to_push}]
 limit: 10000
 format: table
