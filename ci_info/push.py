@@ -286,7 +286,7 @@ class Push:
         """
         # The maximum number of parents to search. If the task wasn't run
         # on any of them, we assume there was no prior regression.
-        max_depth = 5
+        max_depth = 14
         regressions = {}
 
         for label in self.candidate_regressions:
@@ -302,6 +302,8 @@ class Push:
 
                 other = other.parent
                 count += 1
+                if count == max_depth:
+                    break
 
             if not prior_regression:
                 regressions[label] = count
