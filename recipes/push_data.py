@@ -35,10 +35,13 @@ def run(args):
         header
     ]
 
+    num_cached = 0
+
     for push in tqdm(pushes):
         key = f"push_data.{push.rev}"
 
         if config.cache.has(key):
+            num_cached += 1
             data.append(config.cache.get(key))
         else:
             try:
@@ -56,5 +59,7 @@ def run(args):
             except Exception as e:
                 logger.error(e)
                 continue
+
+    logger.info(f"{num_cached} pushes were already cached out of {len(pushes)}")
 
     return data
