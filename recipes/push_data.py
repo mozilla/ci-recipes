@@ -25,7 +25,7 @@ def run(args):
     )
 
     header = [
-        'Revision',
+        'Revisions',
         'All Tasks',
         'Regressions (possible)',
         'Regressions (likely)',
@@ -46,7 +46,7 @@ def run(args):
         else:
             try:
                 value = [
-                    push.rev,
+                    push.revs,
                     list(push.task_labels),
                     list(push.possible_regressions),
                     list(push.likely_regressions),

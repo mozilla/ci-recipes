@@ -70,17 +70,21 @@ class LabelSummary:
 
 class Push:
 
-    def __init__(self, rev, branch='autoland'):
+    def __init__(self, revs, branch='autoland'):
         """A representation of a single push.
 
         Args:
-            rev (str): Revision of the top-most commit in the push.
+            revs (list): List of revisions of commits in the push (top-most is the first element).
             branch (str): Branch to look on (default: autoland).
         """
-        self.rev = rev
+        self.revs = revs
         self.branch = branch
         self._id = None
         self._date = None
+
+    @property
+    def rev(self):
+        return self.revs[0]
 
     @property
     def backedoutby(self):
@@ -443,8 +447,8 @@ def make_push_objects(**kwargs):
         for pushid, date, revs, parents in data:
             topmost = list(set(revs) - set(parents))[0]
 
-            cur = Push(topmost)
-            
+            cur = Push([topmost] + [r for r in revs if r != topmost])
+
             # avoids the need to query hgmo to find this info
             cur._id = pushid
             cur._date = date
