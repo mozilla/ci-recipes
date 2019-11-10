@@ -458,4 +458,6 @@ def make_push_objects(**kwargs):
             pushes.append(cur)
             prev = cur
 
+    pushes.sort(key=lambda p: p._id)
+
     return pushes
