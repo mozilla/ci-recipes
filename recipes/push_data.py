@@ -8,6 +8,7 @@ Generate test-related data about pushes.
 
 import json
 import os
+import traceback
 
 from adr import config
 from adr.errors import MissingDataError
@@ -55,10 +56,8 @@ def run(args):
                 config.cache.forever(key, value)
             except MissingDataError:
                 logger.warning(f"Tasks for push {push.rev} can't be found on ActiveData")
-                continue
             except Exception as e:
-                logger.error(e)
-                continue
+                traceback.print_exc()
 
     logger.info(f"{num_cached} pushes were already cached out of {len(pushes)}")
 
