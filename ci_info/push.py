@@ -324,7 +324,7 @@ class Push:
         Returns:
             set: Set of task labels (str).
         """
-        return set([label for label, count in self.regressions.items() if count > 0])
+        return set(label for label, count in self.regressions.items() if count > 0)
 
     @property
     def likely_regressions(self):
@@ -337,7 +337,7 @@ class Push:
         Returns:
             set: Set of task labels (str).
         """
-        return set([label for label, count in self.regressions.items() if count == 0])
+        return set(label for label, count in self.regressions.items() if count == 0)
 
     @memoize
     def get_shadow_scheduler_tasks(self, name):
