@@ -6,7 +6,7 @@ Show information related to how "healthy" a push looks (autoland only)
     adr push_health -r <revision>
 """
 
-from ci_info import Push
+from mozci.push import Push
 
 
 def run(args):

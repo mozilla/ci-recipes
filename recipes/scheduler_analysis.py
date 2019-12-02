@@ -23,7 +23,7 @@ from adr.util.memoize import memoized_property
 from icecream import ic
 from loguru import logger
 
-from ci_info import Push, make_push_objects
+from mozci.push import Push, make_push_objects
 
 here = Path(__file__).parent.resolve()
 

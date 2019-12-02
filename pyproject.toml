@@ -1,10 +1,9 @@
 [tool.poetry]
 name = "ci-recipes"
-version = "0.1.0"
+version = "0.2.0"
 description = "Collection of CI related ActiveData recipes."
 
 packages = [
-    { include = "ci_info" },
     { include = "recipes" },
 ]
 include = [
@@ -15,18 +14,20 @@ include = [
 license = "MPL-2.0"
 authors = [
     "Andrew Halberstadt <ahal@mozilla.com>",
+    "Marco Castelluccio <marco@mozilla.com>",
 ]
 
 readme = "README.md"
-repository = "https://github.com/ahal/ci-recipes"
-homepage = "https://github.com/ahal/ci-recipes"
+repository = "https://github.com/mozilla/ci-recipes"
+homepage = "https://github.com/mozilla/ci-recipes"
 
 [tool.poetry.dependencies]
 python = "^3.7"
-adr = "^0.16.3"
+adr = "^0.16.6"
 loguru = "^0.2.5"
 icecream = "^1.5"
 tqdm = "^4.32"
+mozci = "^0.1.2"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.7.7"

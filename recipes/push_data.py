@@ -16,7 +16,7 @@ from adr.query import run_query
 from loguru import logger
 from tqdm import tqdm
 
-from ci_info import Push, make_push_objects
+from mozci.push import Push, make_push_objects
 
 
 def run(args):
