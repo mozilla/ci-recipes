@@ -1,7 +1,7 @@
 branch:
   flags: ['-B', '--branch']
   default: "autoland"
-  choices: ["mozilla-central", "mozilla-inbound", "autoland", "beta", "release"]
+  choices: ["mozilla-central", "mozilla-inbound", "autoland", "beta", "release", "try"]
   type: str
   help: "Branch to query results from"
 
