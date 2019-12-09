@@ -69,8 +69,9 @@ def run(args):
     manifestsB = get_manifests_by_task(Push(args.revB, branch=args.branch))
 
     labels = sorted(set(list(manifestsA.keys()) + list(manifestsB.keys())))
-    fltr = re.compile(args.task_filter)
-    labels = filter(fltr.search, labels)
+    if args.task_filter:
+        fltr = re.compile(args.task_filter)
+        labels = filter(fltr.search, labels)
 
     for label in labels:
         logger.info(f"Processing {label}")
