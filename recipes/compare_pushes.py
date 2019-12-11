@@ -47,9 +47,9 @@ def normalize(manifest):
 def get_manifests_by_task(push):
     tasks = [t for t in push.tasks
              if t.label in push.scheduled_task_labels
-             if t.kind == 'test']
+             if t.label.startswith('test-')]
 
-    manifests_by_task = defaultdict(list)
+    manifests_by_task = defaultdict(set)
     for task in tasks:
         label, chunk = task.label.rsplit('-', 1)
         try:
@@ -60,7 +60,7 @@ def get_manifests_by_task(push):
         manifests = task.groups
         if isinstance(manifests, str):
             manifests = [manifests]
-        manifests_by_task[label].extend(map(normalize, manifests))
+        manifests_by_task[label].update(map(normalize, manifests))
     return manifests_by_task
 
 
