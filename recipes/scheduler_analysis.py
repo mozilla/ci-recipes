@@ -155,7 +155,7 @@ class Scheduler:
         score = Score(tasks=len(tasks))
 
         if push.backedout:
-            if push.likely_regressions & tasks:
+            if push.get_likely_regressions("label") & tasks:
                 score.primary_backouts += 1
             else:
                 score.secondary_backouts += 1
