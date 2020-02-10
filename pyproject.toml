@@ -23,11 +23,11 @@ homepage = "https://github.com/mozilla/ci-recipes"
 
 [tool.poetry.dependencies]
 python = "^3.7"
-adr = "^0.16.6"
-loguru = "^0.2.5"
+adr = "^0.17"
+loguru = "^0.2"
 icecream = "^1.5"
 tqdm = "^4.32"
-mozci = "^0.2.0"
+mozci = "^1.0"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.7.7"

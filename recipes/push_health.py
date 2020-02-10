@@ -15,7 +15,7 @@ def run(args):
     num_scheduled = len(push.scheduled_task_labels)
     num_total = len(push.target_task_labels)
     percentage = round(float(num_scheduled) / num_total * 100, 1)
-    all_regressions = push.possible_regressions | push.likely_regressions
+    all_regressions = push.get_possible_regressions("label") | push.get_likely_regressions("label")
 
     return [[
         'Tasks Scheduled',
@@ -33,8 +33,8 @@ def run(args):
         percentage,
         push.scheduled_duration,
         push.backedout,
-        len(push.possible_regressions),
-        len(push.likely_regressions),
+        len(push.get_possible_regressions("label")),
+        len(push.get_likely_regressions("label")),
         len(all_regressions & push.scheduled_task_labels),
         len(all_regressions - push.scheduled_task_labels),
     ]]

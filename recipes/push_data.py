@@ -28,8 +28,11 @@ def run(args):
     header = [
         'Revisions',
         'All Tasks',
-        'Regressions (possible)',
-        'Regressions (likely)',
+        'Task Regressions (possible)',
+        'Task Regressions (likely)',
+        'All Groups',
+        'Group Regressions (possible)',
+        'Group Regressions (likely)',
     ]
 
     data = [
@@ -49,8 +52,11 @@ def run(args):
                 value = [
                     push.revs,
                     list(push.task_labels),
-                    list(push.possible_regressions),
-                    list(push.likely_regressions),
+                    list(push.get_possible_regressions("label")),
+                    list(push.get_likely_regressions("label")),
+                    list(push.group_summaries.keys()),
+                    list(push.get_possible_regressions("group")),
+                    list(push.get_likely_regressions("group")),
                 ]
                 data.append(value)
                 config.cache.forever(key, value)
