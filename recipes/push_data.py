@@ -3,7 +3,7 @@ Generate test-related data about pushes.
 
 .. code-block:: bash
 
-    adr push_data [--branch <branch>] [--from <date> [--to <date>]]
+    adr push_data [--branch <branch>] [--from <date> [--to <date>]] [--runnable <runnable>]
 """
 
 import json
@@ -27,12 +27,9 @@ def run(args):
 
     header = [
         'Revisions',
-        'All Tasks',
-        'Task Regressions (possible)',
-        'Task Regressions (likely)',
-        'All Groups',
-        'Group Regressions (possible)',
-        'Group Regressions (likely)',
+        'All Runnables',
+        'Regressions (possible)',
+        'Regressions (likely)',
     ]
 
     data = [
@@ -42,21 +39,23 @@ def run(args):
     num_cached = 0
 
     for push in tqdm(pushes):
-        key = f"push_data.{push.rev}"
+        key = f"push_data.{args.runnable}.{push.rev}"
 
         if config.cache.has(key):
             num_cached += 1
             data.append(config.cache.get(key))
         else:
             try:
+                if args.runnable == "label":
+                    runnables = push.task_labels
+                elif args.runnable == "group":
+                    runnables = push.group_summaries.keys()
+
                 value = [
                     push.revs,
-                    list(push.task_labels),
-                    list(push.get_possible_regressions("label")),
-                    list(push.get_likely_regressions("label")),
-                    list(push.group_summaries.keys()),
-                    list(push.get_possible_regressions("group")),
-                    list(push.get_likely_regressions("group")),
+                    list(runnables),
+                    list(push.get_possible_regressions(args.runnable)),
+                    list(push.get_likely_regressions(args.runnable)),
                 ]
                 data.append(value)
                 config.cache.forever(key, value)

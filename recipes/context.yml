@@ -34,3 +34,10 @@ to_date:
   default: 'eod'  # end of day
   type: validdatetime
   help: "Ending date to pull data from, defaults to end of day"
+
+runnable:
+  flags: ['--runnable']
+  default: 'label'
+  choices: ['label', 'group']
+  type: str
+  help: "type of runnable to get regressions fors"
