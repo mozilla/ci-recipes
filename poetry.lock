@@ -294,7 +294,7 @@ description = "Python implementation of Markdown."
 name = "markdown"
 optional = false
 python-versions = ">=3.5"
-version = "3.2"
+version = "3.2.1"
 
 [package.dependencies]
 setuptools = ">=36"
@@ -332,7 +332,7 @@ description = ""
 name = "mozci"
 optional = false
 python-versions = ">=3.7,<4.0"
-version = "1.1.1"
+version = "1.2.0"
 
 [package.dependencies]
 adr = ">=0.17,<0.18"
@@ -515,7 +515,7 @@ description = "tox is a generic virtualenv management and test command line tool
 name = "tox"
 optional = false
 python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
-version = "3.14.3"
+version = "3.14.4"
 
 [package.dependencies]
 colorama = ">=0.4.1"
@@ -523,7 +523,7 @@ filelock = ">=3.0.0,<4"
 packaging = ">=14"
 pluggy = ">=0.12.0,<1"
 py = ">=1.4.17,<2"
-six = ">=1.0.0,<2"
+six = ">=1.14.0,<2"
 toml = ">=0.9.4"
 virtualenv = ">=16.0.0"
 
@@ -573,7 +573,7 @@ description = "Virtual Python Environment builder"
 name = "virtualenv"
 optional = false
 python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,>=2.7"
-version = "20.0.2"
+version = "20.0.3"
 
 [package.dependencies]
 appdirs = ">=1.4.3,<2"
@@ -718,8 +718,8 @@ loguru = [
     {file = "loguru-0.2.5.tar.gz", hash = "sha256:68297d9f23064c2f4764bb5d0c5c767f3ed7f9fc1218244841878f5fc7c94add"},
 ]
 markdown = [
-    {file = "Markdown-3.2-py2.py3-none-any.whl", hash = "sha256:9c71241ec237505535eabff7a38b1307250f16cea174bb1e505c3e032f108867"},
-    {file = "Markdown-3.2.tar.gz", hash = "sha256:5ad7180c3ec16422a764568ad6409ec82460c40d1631591fa53d597033cc98bf"},
+    {file = "Markdown-3.2.1-py2.py3-none-any.whl", hash = "sha256:e4795399163109457d4c5af2183fbe6b60326c17cfdf25ce6e7474c6624f725d"},
+    {file = "Markdown-3.2.1.tar.gz", hash = "sha256:90fee683eeabe1a92e149f7ba74e5ccdc81cd397bd6c516d93a8da0ef90b6902"},
 ]
 markupsafe = [
     {file = "MarkupSafe-1.1.1-cp27-cp27m-macosx_10_6_intel.whl", hash = "sha256:09027a7803a62ca78792ad89403b1b7a73a01c8cb65909cd876f7fcebd79b161"},
@@ -765,8 +765,8 @@ more-itertools = [
     {file = "more_itertools-8.2.0-py3-none-any.whl", hash = "sha256:5dd8bcf33e5f9513ffa06d5ad33d78f31e1931ac9a18f33d37e77a180d393a7c"},
 ]
 mozci = [
-    {file = "mozci-1.1.1-py3-none-any.whl", hash = "sha256:40045707891961cc392f48c0ca0deb017666fcbedfa2be24a60239adf1801b25"},
-    {file = "mozci-1.1.1.tar.gz", hash = "sha256:8ac48a004cbf798e26497d3aff163fe44039c42ad2a722944453962c60d82c82"},
+    {file = "mozci-1.2.0-py3-none-any.whl", hash = "sha256:bc2acf2df03390d88001b65ad0dc09bc73bce189d5d5a2548f8f73825601796c"},
+    {file = "mozci-1.2.0.tar.gz", hash = "sha256:d726228a4ed0601279e696c79aff54ba31a0fa8f57fed543a1066dc923205892"},
 ]
 packaging = [
     {file = "packaging-20.1-py2.py3-none-any.whl", hash = "sha256:170748228214b70b672c581a3dd610ee51f733018650740e98c7df862a583f73"},
@@ -845,8 +845,8 @@ tomlkit = [
     {file = "tomlkit-0.5.8.tar.gz", hash = "sha256:32c10cc16ded7e4101c79f269910658cc2a0be5913f1252121c3cd603051c269"},
 ]
 tox = [
-    {file = "tox-3.14.3-py2.py3-none-any.whl", hash = "sha256:806d0a9217584558cc93747a945a9d9bff10b141a5287f0c8429a08828a22192"},
-    {file = "tox-3.14.3.tar.gz", hash = "sha256:06ba73b149bf838d5cd25dc30c2dd2671ae5b2757cf98e5c41a35fe449f131b3"},
+    {file = "tox-3.14.4-py2.py3-none-any.whl", hash = "sha256:5c45d08f1dcc9bc97cdea3e5a69c8f4ad042cc37cbe6cf53e126f4a9005b7d3b"},
+    {file = "tox-3.14.4.tar.gz", hash = "sha256:73e2ade68cd71a2765ee739ecc27c8c92e9b9c09acbad0f2c5307b20214e0d13"},
 ]
 tqdm = [
     {file = "tqdm-4.42.1-py2.py3-none-any.whl", hash = "sha256:fe231261cfcbc6f4a99165455f8f6b9ef4e1032a6e29bccf168b4bf42012f09c"},
@@ -860,8 +860,8 @@ urllib3 = [
     {file = "urllib3-1.25.8.tar.gz", hash = "sha256:87716c2d2a7121198ebcb7ce7cccf6ce5e9ba539041cfbaeecfb641dc0bf6acc"},
 ]
 virtualenv = [
-    {file = "virtualenv-20.0.2-py2.py3-none-any.whl", hash = "sha256:e0099edd03c77e14a8ac9be62e45af28759984075d9409bb2c3a4edeb7420a23"},
-    {file = "virtualenv-20.0.2.tar.gz", hash = "sha256:7e4e234e1f27755685dc54063d989756790b0682d60e304db589fa1604938013"},
+    {file = "virtualenv-20.0.3-py2.py3-none-any.whl", hash = "sha256:ec376274f5abb6da25e0ef81d082d2884cda8fd924e1ff73b4c2bb5416d48c87"},
+    {file = "virtualenv-20.0.3.tar.gz", hash = "sha256:526484e29a9a12f0680d251331e7841b36f1e2b918935377f173f764b1b8be89"},
 ]
 werkzeug = [
     {file = "Werkzeug-1.0.0-py2.py3-none-any.whl", hash = "sha256:6dc65cf9091cf750012f56f2cad759fa9e879f511b5ff8685e456b4e3bf90d16"},
