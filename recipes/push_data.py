@@ -6,6 +6,7 @@ Generate test-related data about pushes.
     adr push_data [--branch <branch>] [--from <date> [--to <date>]] [--runnable <runnable>]
 """
 
+import concurrent.futures
 import json
 import os
 import traceback
@@ -24,6 +25,19 @@ def run(args):
     pushes = make_push_objects(
         from_date=args.from_date, to_date=args.to_date, branch=args.branch
     )
+
+    # Load data from all pushes concurrently.
+    with concurrent.futures.ThreadPoolExecutor(max_workers=os.cpu_count() + 1) as executor:
+        def preload_push(push):
+            if args.runnable == "label":
+                len(push.task_labels)
+            else:
+                len(push.group_summaries)
+
+        futures = [executor.submit(preload_push, push) for push in pushes]
+
+        for future in tqdm(concurrent.futures.as_completed(futures), total=len(futures)):
+            future.result()
 
     header = [
         'Revisions',
