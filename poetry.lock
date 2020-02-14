@@ -332,7 +332,7 @@ description = ""
 name = "mozci"
 optional = false
 python-versions = ">=3.7,<4.0"
-version = "1.2.0"
+version = "1.2.1"
 
 [package.dependencies]
 adr = ">=0.17,<0.18"
@@ -573,13 +573,13 @@ description = "Virtual Python Environment builder"
 name = "virtualenv"
 optional = false
 python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,>=2.7"
-version = "20.0.3"
+version = "20.0.4"
 
 [package.dependencies]
 appdirs = ">=1.4.3,<2"
 distlib = ">=0.3.0,<1"
 filelock = ">=3.0.0,<4"
-six = ">=1.12.0,<2"
+six = ">=1.9.0,<2"
 
 [package.dependencies.importlib-metadata]
 python = "<3.8"
@@ -765,8 +765,8 @@ more-itertools = [
     {file = "more_itertools-8.2.0-py3-none-any.whl", hash = "sha256:5dd8bcf33e5f9513ffa06d5ad33d78f31e1931ac9a18f33d37e77a180d393a7c"},
 ]
 mozci = [
-    {file = "mozci-1.2.0-py3-none-any.whl", hash = "sha256:bc2acf2df03390d88001b65ad0dc09bc73bce189d5d5a2548f8f73825601796c"},
-    {file = "mozci-1.2.0.tar.gz", hash = "sha256:d726228a4ed0601279e696c79aff54ba31a0fa8f57fed543a1066dc923205892"},
+    {file = "mozci-1.2.1-py3-none-any.whl", hash = "sha256:3a097f89669adee873903a70f3c4b23df71183d9a7c1a35c144af5888652a72a"},
+    {file = "mozci-1.2.1.tar.gz", hash = "sha256:904730c63ca116b5b77b787aac6a337ebc8a3adb3b82209cc7c3812be6aef259"},
 ]
 packaging = [
     {file = "packaging-20.1-py2.py3-none-any.whl", hash = "sha256:170748228214b70b672c581a3dd610ee51f733018650740e98c7df862a583f73"},
@@ -860,8 +860,8 @@ urllib3 = [
     {file = "urllib3-1.25.8.tar.gz", hash = "sha256:87716c2d2a7121198ebcb7ce7cccf6ce5e9ba539041cfbaeecfb641dc0bf6acc"},
 ]
 virtualenv = [
-    {file = "virtualenv-20.0.3-py2.py3-none-any.whl", hash = "sha256:ec376274f5abb6da25e0ef81d082d2884cda8fd924e1ff73b4c2bb5416d48c87"},
-    {file = "virtualenv-20.0.3.tar.gz", hash = "sha256:526484e29a9a12f0680d251331e7841b36f1e2b918935377f173f764b1b8be89"},
+    {file = "virtualenv-20.0.4-py2.py3-none-any.whl", hash = "sha256:de2cbdd5926c48d7b84e0300dea9e8f276f61d186e8e49223d71d91250fbaebd"},
+    {file = "virtualenv-20.0.4.tar.gz", hash = "sha256:08f3623597ce73b85d6854fb26608a6f39ee9d055c81178dc6583803797f8994"},
 ]
 werkzeug = [
     {file = "Werkzeug-1.0.0-py2.py3-none-any.whl", hash = "sha256:6dc65cf9091cf750012f56f2cad759fa9e879f511b5ff8685e456b4e3bf90d16"},
