@@ -19,6 +19,16 @@ First [install poetry][2], then run:
 
 You will need Python 3.7 or higher.
 
+## Windows installation
+
+The `poetry install` command may lock up on Windows10 (Python3.7.6) you can get around this with:
+
+    poetry export -f requirements.txt > requirements.txt
+    python -m venv .venv
+    .venv\Scripts\activate
+    pip install -r requirements.txt
+    
+
 # Usage
 
 The `poetry install` command will create a virtualenv with all of the required dependencies

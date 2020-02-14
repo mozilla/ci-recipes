@@ -105,3 +105,12 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# directories starting with dot
+.*/*
+
+# IDE
+/*.iml
+
+# pip
+requirements.txt
