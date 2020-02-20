@@ -41,6 +41,8 @@ def run(args):
     for push in tqdm(pushes):
         key = f"push_data.{args.runnable}.{push.rev}"
 
+        logger.info(f"Analyzing {push.rev} at the {args.runnable} level...")
+
         if config.cache.has(key):
             num_cached += 1
             data.append(config.cache.get(key))
