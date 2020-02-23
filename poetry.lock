@@ -277,7 +277,7 @@ description = ""
 name = "mozci"
 optional = false
 python-versions = ">=3.7,<4.0"
-version = "1.2.3"
+version = "1.2.5"
 
 [package.dependencies]
 adr = ">=0.17,<0.18"
@@ -518,7 +518,7 @@ description = "Virtual Python Environment builder"
 name = "virtualenv"
 optional = false
 python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,>=2.7"
-version = "20.0.4"
+version = "20.0.5"
 
 [package.dependencies]
 appdirs = ">=1.4.3,<2"
@@ -646,8 +646,8 @@ more-itertools = [
     {file = "more_itertools-8.2.0-py3-none-any.whl", hash = "sha256:5dd8bcf33e5f9513ffa06d5ad33d78f31e1931ac9a18f33d37e77a180d393a7c"},
 ]
 mozci = [
-    {file = "mozci-1.2.3-py3-none-any.whl", hash = "sha256:89692609e71af1c48851b5629c516cee9175c23acf5e47c4001713cc4a6e9b12"},
-    {file = "mozci-1.2.3.tar.gz", hash = "sha256:00d4af6fb223cfd031b8cd118099ead0d93f2e646913761cd9d3b8c874132f8d"},
+    {file = "mozci-1.2.5-py3-none-any.whl", hash = "sha256:9e94cc97afe929517f54ddec75fff809f58c0d2bd520f233fc2881a111b9ca46"},
+    {file = "mozci-1.2.5.tar.gz", hash = "sha256:8667845cef266f2e43afac5a99220072fd1b783bd74fa0fe966c427240f59168"},
 ]
 packaging = [
     {file = "packaging-20.1-py2.py3-none-any.whl", hash = "sha256:170748228214b70b672c581a3dd610ee51f733018650740e98c7df862a583f73"},
@@ -741,8 +741,8 @@ urllib3 = [
     {file = "urllib3-1.25.8.tar.gz", hash = "sha256:87716c2d2a7121198ebcb7ce7cccf6ce5e9ba539041cfbaeecfb641dc0bf6acc"},
 ]
 virtualenv = [
-    {file = "virtualenv-20.0.4-py2.py3-none-any.whl", hash = "sha256:de2cbdd5926c48d7b84e0300dea9e8f276f61d186e8e49223d71d91250fbaebd"},
-    {file = "virtualenv-20.0.4.tar.gz", hash = "sha256:08f3623597ce73b85d6854fb26608a6f39ee9d055c81178dc6583803797f8994"},
+    {file = "virtualenv-20.0.5-py2.py3-none-any.whl", hash = "sha256:5dd42a9f56307542bddc446cfd10ef6576f11910366a07609fe8d0d88fa8fb7e"},
+    {file = "virtualenv-20.0.5.tar.gz", hash = "sha256:531b142e300d405bb9faedad4adbeb82b4098b918e35209af2adef3129274aae"},
 ]
 zipp = [
     {file = "zipp-3.0.0-py3-none-any.whl", hash = "sha256:12248a63bbdf7548f89cb4c7cda4681e537031eda29c02ea29674bc6854460c2"},
