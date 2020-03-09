@@ -6,17 +6,14 @@ Generate test-related data about pushes.
     adr push_data [--branch <branch>] [--from <date> [--to <date>]] [--runnable <runnable>]
 """
 
-import json
-import os
 import traceback
 
 from adr import config
 from adr.errors import MissingDataError
-from adr.query import run_query
 from loguru import logger
 from tqdm import tqdm
 
-from mozci.push import Push, make_push_objects
+from mozci.push import make_push_objects
 
 
 def run(args):
@@ -63,7 +60,7 @@ def run(args):
                 config.cache.forever(key, value)
             except MissingDataError:
                 logger.warning(f"Tasks for push {push.rev} can't be found on ActiveData")
-            except Exception as e:
+            except Exception:
                 traceback.print_exc()
 
     logger.info(f"{num_cached} pushes were already cached out of {len(pushes)}")
