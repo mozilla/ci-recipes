@@ -82,14 +82,7 @@ class Scheduler:
             logger.opt(ansi=True).info(f"<cyan>{self.name} loaded from cache</cyan>")
             return config.cache.get(key)
 
-        # If we're baseline simply use the scheduled_task_labels.
-        if self.name == "baseline":
-            tasks = push.scheduled_task_labels
-            logger.opt(ansi=True).info(f"<cyan>{self.name} loaded from artifact</cyan>")
-            config.cache.put(key, tasks, 43200)  # keep results for 30 days
-            return tasks
-
-        # Next check if a shadow scheduler matching our name ran on the push.
+        # Download the shadow scheduler tasks
         tasks = push.get_shadow_scheduler_tasks(self.name)
         if tasks is not None:
             logger.opt(ansi=True).info(f"<cyan>{self.name} loaded from artifact</cyan>")
@@ -119,9 +112,6 @@ def run(args):
     for s in args.strategies:
         logger.info(f"Creating scheduler using strategy {s}")
         schedulers.append(Scheduler(s))
-
-    # use what was actually scheduled as a baseline comparison
-    schedulers.append(Scheduler('baseline'))
 
     # compute dates in range
     pushes = make_push_objects(
