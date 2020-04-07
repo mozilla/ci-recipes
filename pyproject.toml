@@ -27,7 +27,7 @@ adr = "^0.17.5"
 loguru = "^0.4.1"
 icecream = "^2.0.0"
 tqdm = "^4.32"
-mozci = "^1.2.8"
+mozci = "^1.4.0"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.7.7"

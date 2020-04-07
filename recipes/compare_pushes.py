@@ -9,19 +9,23 @@ import ntpath
 import re
 from collections import defaultdict
 from difflib import unified_diff
+from urllib.parse import urlparse
 
 from loguru import logger
 from mozci.push import Push
 
 RUN_CONTEXTS = [
     {
-        "revA": {
-            "flags": ["-r1", "--rev1"],
-            "help": "First revision to compare.",
+        "push": {
+            "flags": ["-p", "--push"],
+            "help": "The push to inspect. Either a treeherder URL to a single push, "
+                    "or of the form '<branch>:<rev>'.",
         },
-        "revB": {
-            "flags": ["-r2", "--rev2"],
-            "help": "Second revision to compare.",
+        "push_compare": {
+            "flags": ["-c", "--compare"],
+            "default": None,
+            "help": "The push to compare against in the same format as "
+                    "'--push'. If not specified, push's parent will be used.",
         },
         "task_filter": {
             "flags": ["--task-filter"],
@@ -64,38 +68,69 @@ def get_manifests_by_task(push):
     return manifests_by_task
 
 
-def run(args):
-    manifestsA = get_manifests_by_task(Push(args.revA, branch=args.branch))
-    manifestsB = get_manifests_by_task(Push(args.revB, branch=args.branch))
+def get_push_object(spec):
+    rev = branch = None
 
-    labels = sorted(set(list(manifestsA.keys()) + list(manifestsB.keys())))
+    if "://" in spec:
+        # Likely a URL, try to parse out branch and rev.
+        o = urlparse(spec)
+        if "treeherder.mozilla.org" in o.netloc:
+            query = o.fragment[o.fragment.index('?') + 1:]
+            params = {p[0]: p[1] for p in [i.split("=") for i in query.split("&")]}
+            rev = params.get("revision")
+            branch = params.get("repo")
+
+    elif ":" in spec:
+        branch, rev = spec.split(":", 1)
+
+    if not branch or not rev:
+        raise TypeError(f"Could not parse a branch and revision from {spec}! " +
+                        "Expected a treeherder url or the format '<branch>:<revision>'.")
+
+    return Push(rev, branch=branch)
+
+
+def run(args):
+    push = get_push_object(args.push)
+
+    if args.push_compare:
+        compare = get_push_object(args.push_compare)
+    else:
+        compare = push.parent
+
+    push_manifests = get_manifests_by_task(push)
+    compare_manifests = get_manifests_by_task(compare)
+
     if args.task_filter:
+        labels = sorted(set(list(push_manifests.keys()) + list(compare_manifests.keys())))
         fltr = re.compile(args.task_filter)
         labels = filter(fltr.search, labels)
+    else:
+        labels = sorted(push_manifests.keys())
 
     for label in labels:
         logger.info(f"Processing {label}")
 
-        if label not in manifestsA:
+        if label not in push_manifests:
             logger.warning(f"{label} not run in rev1!")
             continue
 
-        if label not in manifestsB:
+        if label not in compare_manifests:
             logger.warning(f"{label} not run in rev2!")
             continue
 
-        groupsA = sorted(manifestsA[label])
-        groupsB = sorted(manifestsB[label])
-        if groupsA == groupsB:
+        push_groups = sorted(push_manifests[label])
+        compare_groups = sorted(compare_manifests[label])
+        if push_groups == compare_groups:
             logger.info(f"{label} matches!")
             continue
 
         logger.warning(f"{label} doesn't match!")
         out = unified_diff(
-            groupsA,
-            groupsB,
-            fromfile=f'Rev 1: {args.revA}',
-            tofile=f'Rev 2: {args.revB}',
+            push_groups,
+            compare_groups,
+            fromfile=f'Rev 1: {push.rev}',
+            tofile=f'Rev 2: {compare.rev}',
             n=8
         )
         diff = []
