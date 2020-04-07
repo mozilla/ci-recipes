@@ -18,13 +18,14 @@ RUN_CONTEXTS = [
     {
         "push": {
             "flags": ["-p", "--push"],
-            "help": "The push to inspect."
+            "help": "The push to inspect. Either a treeherder URL to a single push, "
+                    "or of the form '<branch>:<rev>'.",
         },
         "push_compare": {
             "flags": ["-c", "--compare"],
             "default": None,
-            "help": "The push to compare against. If not specified, push's "
-                    "parent will be used.",
+            "help": "The push to compare against in the same format as "
+                    "'--push'. If not specified, push's parent will be used.",
         },
         "task_filter": {
             "flags": ["--task-filter"],
