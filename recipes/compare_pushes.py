@@ -100,10 +100,12 @@ def run(args):
     push_manifests = get_manifests_by_task(push)
     compare_manifests = get_manifests_by_task(compare)
 
-    labels = sorted(set(list(push_manifests.keys()) + list(compare_manifests.keys())))
     if args.task_filter:
+        labels = sorted(set(list(push_manifests.keys()) + list(compare_manifests.keys())))
         fltr = re.compile(args.task_filter)
         labels = filter(fltr.search, labels)
+    else:
+        labels = sorted(push_manifests.keys())
 
     for label in labels:
         logger.info(f"Processing {label}")
