@@ -4,7 +4,7 @@ description = "Utility for running ActiveData recipes"
 name = "adr"
 optional = false
 python-versions = ">=3.6,<4.0"
-version = "0.17.7"
+version = "0.17.10"
 
 [package.dependencies]
 appdirs = ">=1.4,<2.0"
@@ -19,7 +19,7 @@ pyyaml = ">=5.1,<6.0"
 redis = ">=3.2,<4.0"
 requests = ">=2.21.0,<3.0.0"
 terminaltables = ">=3.1.0,<4.0.0"
-tomlkit = ">=0.5.3,<0.6.0"
+tomlkit = ">=0.5.3,<0.7.0"
 zstandard = ">=0.13.0,<0.14.0"
 
 [package.extras]
@@ -273,10 +273,10 @@ description = ""
 name = "mozci"
 optional = false
 python-versions = ">=3.7,<4.0"
-version = "1.4.0"
+version = "1.5.0"
 
 [package.dependencies]
-adr = ">=0.17.6,<0.18.0"
+adr = ">=0.17.9,<0.19.0"
 taskcluster_urls = ">=12.1,<13.0"
 
 [[package]]
@@ -577,8 +577,8 @@ python-versions = "^3.7"
 
 [metadata.files]
 adr = [
-    {file = "adr-0.17.7-py3-none-any.whl", hash = "sha256:b15a10ccf65f17d8e50bf8086487ad319ed356a1ce9eeacb7459e2a9b7739606"},
-    {file = "adr-0.17.7.tar.gz", hash = "sha256:8fcdb02c27e57da239dd6774ff5395a03a6f4dc39ee7d76bd077c146a2629ebf"},
+    {file = "adr-0.17.10-py3-none-any.whl", hash = "sha256:2f2198d4d10ddce5f747b48feec5e4a2c61caf293d4ab7402e0fe6bcbdb4e580"},
+    {file = "adr-0.17.10.tar.gz", hash = "sha256:288f8ee777b6bc6ca9e1f9b0aa6c89a97094a17cc3c58457fc03613e7789de8a"},
 ]
 appdirs = [
     {file = "appdirs-1.4.3-py2.py3-none-any.whl", hash = "sha256:d8b24664561d0d34ddfaec54636d502d7cea6e29c3eaf68f3df6180863e2166e"},
@@ -670,8 +670,8 @@ more-itertools = [
     {file = "more_itertools-8.2.0-py3-none-any.whl", hash = "sha256:5dd8bcf33e5f9513ffa06d5ad33d78f31e1931ac9a18f33d37e77a180d393a7c"},
 ]
 mozci = [
-    {file = "mozci-1.4.0-py3-none-any.whl", hash = "sha256:76941cec8415785cf048d897d204545dfc8dcf55850ef6d7fc78619e9bdd019b"},
-    {file = "mozci-1.4.0.tar.gz", hash = "sha256:4af01f79c8dc4c61b53953c2a2b19ae0531f3d33cfb1099a787f7d522f412fdc"},
+    {file = "mozci-1.5.0-py3-none-any.whl", hash = "sha256:9a3d55f566e55bdaee8f4d3d9f25efa1aac8e94712c6d6d8f5eb12b2c7aa78b1"},
+    {file = "mozci-1.5.0.tar.gz", hash = "sha256:9c257e93e3cf6c72a388afe66cb1a27efe12d90e4b2d538afbb5954ff652b287"},
 ]
 packaging = [
     {file = "packaging-20.3-py2.py3-none-any.whl", hash = "sha256:82f77b9bee21c1bafbf35a84905d604d5d1223801d639cf3ed140bd651c08752"},
