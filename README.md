@@ -1,3 +1,5 @@
+### Archived due to ActiveData being decommissioned
+
 [![Build Status](https://travis-ci.org/ahal/ci-recipes.svg?branch=master)](https://travis-ci.org/ahal/ci-recipes)
 [![PyPI version](https://readthedocs.org/projects/ci-recipes/badge/?version=latest)](https://ci-recipes.readthedocs.io)
 
